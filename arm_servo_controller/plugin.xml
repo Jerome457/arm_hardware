@@ -1,0 +1,6 @@
+<library path="arm_servo_controller">
+  <class
+    name="arm_servo_controller/ArmServoHardware"
+    type="arm_servo_controller::ArmServoHardware"
+    base_class_type="hardware_interface::SystemInterface"/>
+</library>

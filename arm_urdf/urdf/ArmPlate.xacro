@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="ArmPlate">
+    <link name="world"/>
+    <joint name="base_to_world" type="fixed">
+        <parent link="world" />
+        <child link="Base_link1-v1" />   
+    </joint>
+    <link name="Base_link1-v1">
+        <inertial>
+            <origin xyz="-0.0674024747578498 -0.052144759691377905 0.001871879485998631" rpy="0.0 0.0 0.0" />
+            <mass value="4.311969816496875" />
+            <inertia ixx="0.03729401814426159" iyy="0.028233182216333773" izz="0.06539104879017638" ixy="-3.479855292809475e-15" iyz="1.0668549377257364e-16" ixz="-0.00020885219602048547" />
+        </inertial>
+        <visual name="Base_link1-v1_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/Base_link1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Base_link1-v1_collision">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/Base_link1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="2ndDOFDDD-v1">
+        <inertial>
+            <origin xyz="0.005563007183593101 0.008083968084292402 -0.10431093233027892" rpy="0.0 -0.0 0.0" />
+            <mass value="6.914197067582951" />
+            <inertia ixx="0.0489503398990333" iyy="0.05164846688679926" izz="0.026188561835283307" ixy="0.000744724254469125" iyz="0.0009319574397850192" ixz="-0.00045704067111378735" />
+        </inertial>
+        <!-- <visual name="2ndDOFDDD-v1_visual">
+            <origin xyz="1.62650033885825e-09 -3.0861703415041576e-10 -0.011999999999999664" rpy="-3.141592653589793 -2.028647007485838e-62 1.7516230804060213e-46" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/2ndDOFDDD-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="2ndDOFDDD-v1_collision">
+            <origin xyz="1.62650033885825e-09 -3.0861703415041576e-10 -0.011999999999999664" rpy="-3.141592653589793 -2.028647007485838e-62 1.7516230804060213e-46" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/2ndDOFDDD-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision> -->
+       <visual>
+            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+            <geometry>
+            <box size="0.1 0.1 0.2"/> <!-- x y z in meters -->
+            </geometry>
+        </visual>
+
+        <!-- Collision geometry -->
+        <collision>
+            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+            <geometry>
+            <box size="0.1 0.1 0.2"/>
+            </geometry>
+        </collision>
+    </link>
+    <link name="lnk1assm-v2">
+        <inertial>
+            <origin xyz="-0.002591598973958833 -0.23584751583887864 -0.00539988945227305" rpy="0.0 1.3877787807823214e-17 -1.5777218104420236e-30" />
+            <mass value="2.0414167169593447" />
+            <inertia ixx="0.029664413351168283" iyy="0.0017505470451872956" izz="0.02962243298274335" ixy="-0.00029616879202136004" iyz="0.0015603149109663106" ixz="2.540746428059758e-05" />
+        </inertial>
+        <visual name="lnk1assm-v2_visual">
+            <origin xyz="-0.003921107309494927 -0.34147748775887143 0.08610000077174858" rpy="1.0011067892201222e-15 2.63677968348484e-16 1.0432232103974771e-16" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/lnk1assm-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="lnk1assm-v2_collision">
+            <origin xyz="-0.003921107309494927 -0.34147748775887143 0.08610000077174858" rpy="1.0011067892201222e-15 2.63677968348484e-16 1.0432232103974771e-16" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/lnk1assm-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="lnk2_assm-v2">
+        <inertial>
+            <origin xyz="0.015287483405147686 0.0015469235286940375 0.14314076456091882" rpy="0.0 -2.802596928649634e-45 7.718750464542261e-60" />
+            <mass value="1.6041672165297656" />
+            <inertia ixx="0.011935327683088248" iyy="0.011817416915501418" izz="0.001112072658466317" ixy="-1.4881667141780628e-06" iyz="-0.0001166157499106618" ixz="-0.0010845287768283282" />
+        </inertial>
+        <visual name="lnk2_assm-v2_visual">
+            <origin xyz="0.03287283838328484 0.003560737736243089 0.2818374324484128" rpy="-1.4080220534306864e-15 -1.059118750771804e-14 -1.4931462929201005" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/lnk2_assm-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="lnk2_assm-v2_collision">
+            <origin xyz="0.03287283838328484 0.003560737736243089 0.2818374324484128" rpy="-1.4080220534306864e-15 -1.059118750771804e-14 -1.4931462929201005" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/lnk2_assm-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="5thDof_mnt-v2">
+        <inertial>
+            <origin xyz="-0.012784684069178872 -0.0013025970291178357 0.031390730609038686" rpy="0.0 -0.0 0.0" />
+            <mass value="0.7682943067467453" />
+            <inertia ixx="0.0005398526790914571" iyy="0.001098740864250658" izz="0.000876494162175584" ixy="-5.5264308595074155e-05" iyz="1.4526969696712633e-05" ixz="0.00015907949467902638" />
+        </inertial>
+        <visual name="5thDof_mnt-v2_visual">
+            <origin xyz="0.06116513562152025 0.004759041505515995 0.04150000244841479" rpy="-3.063942619714997 -1.5707963267948506 0" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/5thDof_mnt-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="5thDof_mnt-v2_collision">
+            <origin xyz="0.06116513562152025 0.004759041505515995 0.04150000244841479" rpy="-3.063942619714997 -1.5707963267948506 0" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/5thDof_mnt-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="6Thdof-v2">
+        <inertial>
+            <origin xyz="0.008214367551119024 0.0006178674357249214 0.031384946859303826" rpy="-2.2420775429197073e-44 -0.0 0.0" />
+            <mass value="0.8639927133401125" />
+            <inertia ixx="0.0009572359903424752" iyy="0.0009230269883602205" izz="0.0002909038116962609" ixy="2.710767043214595e-06" iyz="9.914638568871148e-06" ixz="-4.8704209516635046e-05" />
+        </inertial>
+        <visual name="6Thdof-v2_visual">
+            <origin xyz="0.011036478474497909 -0.012932846063207827 0.08200000244841477" rpy="4.266020662176333e-15 4.485125411027998e-14 -3.0639426197149975" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/6Thdof-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="6Thdof-v2_collision">
+            <origin xyz="0.011036478474497909 -0.012932846063207827 0.08200000244841477" rpy="4.266020662176333e-15 4.485125411027998e-14 -3.0639426197149975" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/6Thdof-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="gripperHousing-v2">
+        <inertial>
+            <origin xyz="-0.00013921429310007394 0.001855694220722368 0.047786878393741856" rpy="0.0 -0.0 0.0" />
+            <mass value="0.5576326934437552" />
+            <inertia ixx="0.0004695146364697145" iyy="0.0008816687160502767" izz="0.0006167594787314344" ixy="-3.232159477185512e-05" iyz="-1.2242098957490621e-05" ixz="9.183742992122149e-07" />
+        </inertial>
+        <visual name="gripperHousing-v2_visual">
+            <origin xyz="-1.525502200117046e-09 3.936792145609047e-09 2.4484144489633764e-09" rpy="-4.266020662176041e-15 -2.0620936462850397e-14 0.07765003387479581" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/gripperHousing-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="gripperHousing-v2_collision">
+            <origin xyz="-1.525502200117046e-09 3.936792145609047e-09 2.4484144489633764e-09" rpy="-4.266020662176041e-15 -2.0620936462850397e-14 0.07765003387479581" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/gripperHousing-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="left_H-v1">
+        <inertial>
+            <origin xyz="-0.03857920530896109 -0.002507519809183858 0.0001992428471497476" rpy="-4.121466071543581e-45 -0.0 0.0" />
+            <mass value="0.4330027264168371" />
+            <inertia ixx="0.0001531814190167935" iyy="0.0003859475340479146" izz="0.00034050173036892506" ixy="-1.8463860142345745e-05" iyz="1.4471313147474644e-05" ixz="4.1220378661202906e-05" />
+        </inertial>
+        <visual name="left_H-v1_visual">
+            <origin xyz="0.03539594370174484 -0.026115815402647638 -0.029483865374257602" rpy="-2.6340835845626366e-13 1.4931462929201007 -1.570796326795163" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/left_H-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="left_H-v1_collision">
+            <origin xyz="0.03539594370174484 -0.026115815402647638 -0.029483865374257602" rpy="-2.6340835845626366e-13 1.4931462929201007 -1.570796326795163" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/left_H-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="right_H-v1">
+        <inertial>
+            <origin xyz="0.03857921508488488 0.0025075221635958746 0.00019924149858097985" rpy="-2.9674555715114166e-45 -0.0 0.0" />
+            <mass value="0.4330027264168263" />
+            <inertia ixx="0.00015318174926833418" iyy="0.0003859473890370778" izz="0.0003405012645987804" ixy="-1.8463956405788322e-05" iyz="-1.4471222312344915e-05" ixz="-4.122038659255113e-05" />
+        </inertial>
+        <visual name="right_H-v1_visual">
+            <origin xyz="0.0014000027762429569 0.02697397988318141 -0.06071536489232356" rpy="-1.5707963267951677 -1.4931462929201007 -1.570796326794629" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/right_H-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="right_H-v1_collision">
+            <origin xyz="0.0014000027762429569 0.02697397988318141 -0.06071536489232356" rpy="-1.5707963267951677 -1.4931462929201007 -1.570796326794629" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/right_H-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="grasp_frame">
+    </link>
+    <joint name="grasp_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0" />
+        <parent link="gripperHousing-v2" />
+        <child link="grasp_frame" />
+    </joint>
+    <joint name="Base_link1-v1_Revolute-1" type="continuous">
+        <origin xyz="-0.05188764 -0.052144760000000005 0.01" rpy="3.141592653589793 -0.0 0.594" />
+        <parent link="Base_link1-v1" />
+        <child link="2ndDOFDDD-v1" />
+        <axis xyz="0.0 -1.158152704299605e-16 1.0" />
+    </joint>
+    <joint name="2ndDOFDDD-v1_Revolute-8" type="revolute">
+        <origin xyz="0.052840300000000937 -0.004111319999999985 -0.13483788000000002" rpy="1.5707963267948974 1.5707963267948828 -1.6484463606696926" />
+        <parent link="2ndDOFDDD-v1" />
+        <child link="lnk1assm-v2" />
+        <axis xyz="4.4493059889183506e-08 8.254742963267541e-16 1.0000002466764686" />
+        <limit lower="0.087266" upper="3.099" effort="1.0" velocity="1.0" />
+    </joint>
+    <joint name="lnk1assm-v2_Revolute-9" type="continuous">
+        <origin xyz="-0.003921103006697173 -0.3414774899999999 0.08534999873249588" rpy="-1.5707963267948828 1.4931462929201005 3.141592653589793" />
+        <parent link="lnk1assm-v2" />
+        <child link="lnk2_assm-v2" />
+        <axis xyz="-0.996987 -0.07757199999999999 2.532454343584795e-16" />
+    </joint>
+    <joint name="lnk2_assm-v2_Revolute-10" type="continuous">
+        <origin xyz="0.03287284000000008 0.003560739999999996 0.28183742999999994" rpy="-3.94430452610506e-31 -1.9569357318777842e-29 3.14" />
+        <parent link="lnk2_assm-v2" />
+        <child link="5thDof_mnt-v2" />
+        <axis xyz="0.0 -3.581972260486363e-77 1.0" />
+    </joint>
+    <joint name="5thDof_mnt-v2_Revolute-11" type="continuous">
+        <origin xyz="0.06116514 0.004759040000000008 0.04150000000000006" rpy="1.9558217197179686e-28 -5.341661116891984e-106 1.4912625582886812e-29" />
+        <parent link="5thDof_mnt-v2" />
+        <child link="6Thdof-v2" />
+        <axis xyz="0.9969869999999998 0.077572 8.907382643586233e-30" />
+    </joint>    
+    <joint name="6Thdof-v2_Revolute-12" type="revolute">
+        <origin xyz="0.011036480000000001 -0.012932850000000001 0.08199999999999989" rpy="-1.9560432897117202e-28 -3.7421984143732066e-56 0.485" />
+        <parent link="6Thdof-v2" />
+        <child link="gripperHousing-v2" />
+        <axis xyz="0.0 -2.21569993751437e-32 1.0" />    
+        <limit
+        lower="-3.14159"
+        upper="2.0944"
+        effort="10"
+        velocity="2.0" />
+    </joint>
+    <joint name="gripperHousing-v2_Slider-13" type="prismatic">
+        <origin xyz="-0.049694199999999994 -0.0058725700000000014 0.07300000000000012" rpy="3.141592653589793 1.5707963267948952 0" />
+        <parent link="gripperHousing-v2" />
+        <child link="left_H-v1" />
+        <axis xyz="1.0132025937202353e-16 0.077572 0.996987" />
+        <limit upper="0.07" lower="-0.04" effort="10" velocity="10" />
+    </joint>
+    <joint name="gripperHousing-v2_Slider-14" type="prismatic">
+        <origin xyz="0.049694190000000006 0.0058725799999999944 0.07300000000000012" rpy="-3.141592653589793 -1.5707963267948941 0" />
+        <parent link="gripperHousing-v2" />
+        <child link="right_H-v1" />
+        <axis xyz="2.0264051874404916e-16 -0.077572 0.996987" />
+        <limit upper="0.07" lower="-0.04" effort="10" velocity="10" />
+        <mimic joint="gripperHousing-v2_Slider-13" />
+    </joint>
+</robot>

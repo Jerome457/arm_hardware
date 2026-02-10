@@ -1,0 +1,6 @@
+<library path="arm_bldc_controller">
+  <class
+    name="arm_bldc_controller/ArmBLDCSystem"
+    type="arm_bldc_controller::ArmBLDCSystem"
+    base_class_type="hardware_interface::SystemInterface"/>
+</library>

@@ -1,0 +1,6 @@
+<library path="stepper_hardware">
+  <class
+    name="stepper_hardware_interface/StepperHardware"
+    type="stepper_hardware_interface::StepperHardware"
+    base_class_type="hardware_interface::SystemInterface"/>
+</library>

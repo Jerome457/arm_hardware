@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot name="stepper_robot">
+
+  <!-- Base link -->
+  <link name="base_link"/>
+
+  <!-- Stepper link -->
+  <link name="stepper_link"/>
+
+  <!-- Revolute joint driven by stepper -->
+  <joint name="stepper_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="stepper_link"/>
+
+    <!-- Axis of rotation -->
+    <axis xyz="0 0 1"/>
+
+    <!-- Joint limits (radians) -->
+    <limit
+      lower="-6.14159"
+      upper="6.14159"
+      effort="1.0"
+      velocity="1.0"/>
+  </joint>
+
+  <!-- ROS 2 control block -->
+  <ros2_control name="StepperSystem" type="system">
+    <hardware>
+      <plugin>stepper_hardware_interface/StepperHardware</plugin>
+      <param name="port">/dev/ttyACM0</param>
+    </hardware>
+
+    <joint name="stepper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+  </ros2_control>
+
+</robot>

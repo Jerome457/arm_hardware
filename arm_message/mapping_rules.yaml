@@ -1,0 +1,3 @@
+-
+  ros2_package_name: 'arm_message'
+  ros2_service_name: 'PickService'

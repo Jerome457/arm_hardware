@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ArmPlate">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import ArmPlate urdf file -->
+    <xacro:include filename="$(find arm_urdf)/urdf/ArmPlate.xacro" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="ArmPlate.ros2_control.xacro" />
+
+
+    <xacro:ArmPlate_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

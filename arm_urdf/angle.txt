@@ -1,0 +1,15 @@
+    <joint name="2ndDOFDDD-v1_Revolute-8" type="revolute">
+        <origin xyz="0.052840300000000937 -0.004111319999999985 -0.13483788000000002" rpy="1.5707963267948974 1.5707963267948828 -1.6484463606696926" />
+        <parent link="2ndDOFDDD-v1" />
+        <child link="lnk1assm-v2" />
+        <axis xyz="4.4493059889183506e-08 8.254742963267541e-16 1.0000002466764686" />
+        <limit lower="0.087266" upper="3.099" effort="1.0" velocity="1.0" />
+    </joint>
+
+
+    <joint name="lnk2_assm-v2_Revolute-10" type="continuous">
+        <origin xyz="0.03287284000000008 0.003560739999999996 0.28183742999999994" rpy="-3.94430452610506e-31 -1.9569357318777842e-29 3.14" />
+        <parent link="lnk2_assm-v2" />
+        <child link="5thDof_mnt-v2" />
+        <axis xyz="0.0 -3.581972260486363e-77 1.0" />
+    </joint>
