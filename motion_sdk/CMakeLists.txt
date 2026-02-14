@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(motion_sdk)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 find_package(ament_cmake REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)

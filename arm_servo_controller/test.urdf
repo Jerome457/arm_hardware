@@ -33,13 +33,13 @@
     <joint name="joint_0">
       <command_interface name="position"/>
       <state_interface name="position"/>
-      <param name="id">0</param>
+      <param name="id">5</param>
     </joint>
 
     <joint name="joint_1">
       <command_interface name="position"/>
       <state_interface name="position"/>
-      <param name="id">1</param>
+      <param name="id">9</param>
     </joint>
   </ros2_control>
 

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "motion_sdk/usb_serial.hpp"
+#include <iostream>
+
 
 namespace motion_sdk {
 

@@ -84,8 +84,8 @@ ArmServoHardware::read(const rclcpp::Time &, const rclcpp::Duration &)
     servos_[i]->getEffort(eff);
     servos_[i]->getSpeed(spd);
 
-    position_state_[i] = ((deg) * DEG2RAD)-M_PI;
-    velocity_state_[i] = spd * DEG2RAD;
+    position_state_[i] = (deg)* M_PI / 180.0;;
+    velocity_state_[i] = spd;
     effort_state_[i] = eff;
   }
   return hardware_interface::return_type::OK;
@@ -96,7 +96,8 @@ ArmServoHardware::write(const rclcpp::Time &, const rclcpp::Duration &)
 {
   for (size_t i = 0; i < num_joints_; ++i)
   {
-    servos_[i]->setPosition((position_command_[i])*RAD2DEG+M_PI);
+    // position_command_[i] = std::clamp(position_command_[i], 0.0, 300);
+    servos_[i]->setPosition((position_command_[i])*180/M_PI);
   }
   return hardware_interface::return_type::OK;
 }
