@@ -42,6 +42,8 @@ private:
   std::unique_ptr<motion_sdk::USBSerial> serial_;
   std::unique_ptr<motion_sdk::Stepper> stepper_;
 
+  bool limit_{true};
+
   rclcpp::Logger logger_{rclcpp::get_logger("stepper_hardware")};
 };
 

@@ -28,6 +28,7 @@
     <hardware>
       <plugin>stepper_hardware_interface/StepperHardware</plugin>
       <param name="port">/dev/ttyACM0</param>
+      <param name="limit">true</param>
     </hardware>
 
     <joint name="stepper_joint">

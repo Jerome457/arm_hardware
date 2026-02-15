@@ -13,6 +13,14 @@ StepperHardware::on_init(const hardware_interface::HardwareInfo & info)
 
   port_ = info.hardware_parameters.at("port");
 
+  if (info.hardware_parameters.count("limit"))
+  {
+    const std::string & val =
+      info.hardware_parameters.at("limit");
+
+    limit_ =(val == "true" || val == "1" || val == "True");
+  }
+
   serial_ = std::make_unique<motion_sdk::USBSerial>(port_, 115200);
 
   if (!serial_->open())
@@ -41,7 +49,7 @@ StepperHardware::on_activate(const rclcpp_lifecycle::State &)
 
   if (stepper_ && stepper_->getPosition(angle_deg))
   {
-    angle_deg/=2;
+    if(limit_) angle_deg/=2;
     double angle_rad = angle_deg * M_PI / 180.0;
 
     position_state_   = angle_rad;
@@ -94,7 +102,7 @@ StepperHardware::read(const rclcpp::Time &, const rclcpp::Duration &)
   if (stepper_ && stepper_->getPosition(angle_deg))
   {
     // Continuous DEG -> RAD
-    angle_deg/=2;
+    if(limit_) angle_deg/=2;
     position_state_ = angle_deg * M_PI / 180.0;
   }
 
@@ -109,7 +117,8 @@ StepperHardware::write(const rclcpp::Time &, const rclcpp::Duration &)
   if (stepper_)
   {
     double cmd_rad = position_command_;
-    double cmd_deg = cmd_rad * 180 / M_PI * 2;
+    double cmd_deg = cmd_rad * 180 / M_PI;
+    if(limit_) cmd_deg*=2;
 
     stepper_->setPosition(static_cast<float>(cmd_deg));
   }
