@@ -199,7 +199,7 @@
     </joint>
 <joint name="Base_link1-v1_Revolute-1" type="revolute">
     <origin xyz="-0.05188764 -0.052144760000000005 0.01"
-            rpy="3.141592653589793 -0.0 0.594" />
+            rpy="3.141592653589793 -0.0 0.09" />
     
     <parent link="Base_link1-v1" />
     <child link="2ndDOFDDD-v1" />
