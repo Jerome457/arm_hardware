@@ -17,9 +17,12 @@
         </ros2_control>
 
         <ros2_control name="Servo" type="system">
-            <hardware>
+            <!-- <hardware>
                 <plugin>arm_servo_controller/ArmServoHardware</plugin>
                 <param name="port">/dev/arm_servo</param>
+            </hardware> -->
+            <hardware>
+                <plugin>mock_components/GenericSystem</plugin>
             </hardware>
             <joint name="6Thdof-v2_Revolute-12">
                 <param name="id">5</param>
@@ -32,8 +35,8 @@
 
         <ros2_control name="Nmotion" type="system">
             <hardware>
-            <plugin>arm_bldc_controller/ArmBLDCSystem</plugin>
-            <param name="device">/dev/arm_nmotion</param>
+                <plugin>arm_bldc_controller/ArmBLDCSystem</plugin>
+                <param name="device">/dev/arm_nmotion</param>
             </hardware>
             <!-- <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
@@ -61,29 +64,30 @@
             </joint>
         </ros2_control>
 
-        <ros2_control name="Stepper" type="system">
-        <hardware>
+        <ros2_control name="Stepper2" type="system">
+        <!-- <hardware>
             <plugin>stepper_hardware_interface/StepperHardware</plugin>
             <param name="port">/dev/arm_2nd_dof</param>
-        </hardware>
-            <!-- <hardware>
+        </hardware> -->
+            <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
-            </hardware> -->
+            </hardware>
             <joint name="2ndDOFDDD-v1_Revolute-8">
+                <param name="limit">true</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['2ndDOFDDD-v1_Revolute-8']}</param>
                 </state_interface>
             </joint>
         </ros2_control>
-        <ros2_control name="Stepper2" type="system">
-        <hardware>
+        <ros2_control name="Stepper1" type="system">
+        <!-- <hardware>
             <plugin>stepper_hardware_interface/StepperHardware</plugin>
             <param name="port">/dev/arm_1st_dof</param>
-        </hardware>
-            <!-- <hardware>
+        </hardware> -->
+            <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
-            </hardware> -->
+            </hardware>
             <joint name="Base_link1-v1_Revolute-1">
                 <command_interface name="position"/>
                 <state_interface name="position">

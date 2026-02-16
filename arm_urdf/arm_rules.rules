@@ -13,7 +13,7 @@ SUBSYSTEM=="tty", ATTRS{serial}=="8D7444525454", MODE:="0666", SYMLINK+="arm_1st
 SUBSYSTEM=="tty", ATTRS{serial}=="8D6F44515454", MODE:="0666", SYMLINK+="arm_2nd_dof"
 
 # Nmotion Motor Controller
-SUBSYSTEM=="tty", ATTRS{serial}=="207433485052", MODE:="0666", SYMLINK+="arm_nmotion"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="207433485052", MODE:="0666", SYMLINK+="arm_nmotion"
 
 # -----------------------------------------------------
 # Add more motors below when needed

@@ -206,10 +206,11 @@
     
     <axis xyz="0.0 -1.158152704299605e-16 1.0" />
     <limit
-        lower="0.0"
-        upper="6.283185307"
+        lower="0.0872665"
+        upper="6.1959188"
         effort="10.0"
-        velocity="1.0" />
+        velocity="100.0" />
+
 </joint>
 
     <joint name="2ndDOFDDD-v1_Revolute-8" type="revolute">
@@ -246,7 +247,7 @@
         lower="0.0"
         upper="6.283185307"
         effort="10.0"
-        velocity="1.0" />
+        velocity="100.0" />
     </joint>
     <joint name="gripperHousing-v2_Slider-13" type="prismatic">
         <origin xyz="-0.049694199999999994 -0.0058725700000000014 0.07300000000000012" rpy="3.141592653589793 1.5707963267948952 0" />

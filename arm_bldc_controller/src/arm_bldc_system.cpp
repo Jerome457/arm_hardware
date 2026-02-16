@@ -3,9 +3,43 @@
 #include <pluginlib/class_list_macros.hpp>
 
 #include <cmath>
+#include <limits.h>
+#include <unistd.h>
+#include <iostream>
 
 namespace arm_bldc_controller
 {
+
+std::string resolveToACM(const std::string& path)
+{
+    char resolved[PATH_MAX];
+
+    // Resolve symlink -> real device
+    if (realpath(path.c_str(), resolved))
+    {
+        std::string real_dev = resolved;
+
+        // Safety: check it's actually ACM
+        if (real_dev.find("ttyACM") != std::string::npos)
+        {
+            std::cout << "[PortResolver] " << path
+                      << " -> " << real_dev << std::endl;
+            return real_dev;
+        }
+        else
+        {
+            std::cerr << "[PortResolver] WARNING: Not ACM: "
+                      << real_dev << std::endl;
+            return real_dev; // still return
+        }
+    }
+
+    // If resolving failed, use original
+    std::cerr << "[PortResolver] WARNING: Could not resolve "
+              << path << ", using as-is" << std::endl;
+
+    return path;
+}
 
 hardware_interface::CallbackReturn
 ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
@@ -17,6 +51,8 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
   if (info.hardware_parameters.count("device")) {
     device_ = info.hardware_parameters.at("device");
   }
+
+  device_= resolveToACM(device_);
 
   size_t joints = info.joints.size();
 
