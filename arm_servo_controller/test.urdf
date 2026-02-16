@@ -27,7 +27,8 @@
   <ros2_control name="ArmSystem" type="system">
     <hardware>
       <plugin>arm_servo_controller/ArmServoHardware</plugin>
-      <param name="port">/dev/ttyACM0</param>
+      <param name="port">/dev/arm_servo</param>
+      <param name="gripper_id">9</param>
     </hardware>
 
     <joint name="joint_0">

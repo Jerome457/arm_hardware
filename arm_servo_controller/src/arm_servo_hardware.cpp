@@ -5,6 +5,30 @@ using hardware_interface::HW_IF_POSITION;
 using hardware_interface::HW_IF_VELOCITY;
 using hardware_interface::HW_IF_EFFORT;
 
+float angle_to_distance(float angle_deg)
+{
+    // Clamp angle to valid range
+    if (angle_deg < 0.0f)
+        angle_deg = 0.0f;
+    if (angle_deg > 220.0f)
+        angle_deg = 220.0f;
+
+    // Linear mapping
+    return (angle_deg / 220.0f) * (-0.04f);
+}
+
+float distance_to_angle(float distance)
+{
+    // Clamp distance to valid range
+    if (distance > 0.0f)
+        distance = 0.0f;
+    if (distance < -0.04f)
+        distance = -0.04f;
+
+    // Linear mapping
+    return (distance / -0.04f) * 220.0f;
+}
+
 namespace arm_servo_controller
 {
 
@@ -15,6 +39,7 @@ ArmServoHardware::on_init(const hardware_interface::HardwareInfo & info)
     return CallbackReturn::ERROR;
 
   num_joints_ = info_.joints.size();
+  gripper_id_=stoi(info_.hardware_parameters.at("gripper_id"));
 
   position_state_.resize(num_joints_, 0.0);
   velocity_state_.resize(num_joints_, 0.0);
@@ -84,7 +109,11 @@ ArmServoHardware::read(const rclcpp::Time &, const rclcpp::Duration &)
     servos_[i]->getEffort(eff);
     servos_[i]->getSpeed(spd);
 
-    position_state_[i] = (deg)* M_PI / 180.0;;
+    if(servo_ids_[i]==gripper_id_){
+      position_state_[i]=angle_to_distance(deg);
+    }else{
+      position_state_[i] = (deg)* M_PI / 180.0;
+    }
     velocity_state_[i] = spd;
     effort_state_[i] = eff;
   }
@@ -97,7 +126,11 @@ ArmServoHardware::write(const rclcpp::Time &, const rclcpp::Duration &)
   for (size_t i = 0; i < num_joints_; ++i)
   {
     // position_command_[i] = std::clamp(position_command_[i], 0.0, 300);
-    servos_[i]->setPosition((position_command_[i])*180/M_PI);
+    if(servo_ids_[i]==gripper_id_){
+      servos_[i]->setPosition(distance_to_angle(position_command_[i]));
+    }else{
+      servos_[i]->setPosition((position_command_[i])*180/M_PI);
+    }
   }
   return hardware_interface::return_type::OK;
 }

@@ -32,6 +32,7 @@ public:
 
 private:
   size_t num_joints_;
+  int gripper_id_;
 
   std::vector<double> position_state_;
   std::vector<double> velocity_state_;
