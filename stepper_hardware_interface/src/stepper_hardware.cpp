@@ -12,6 +12,7 @@ StepperHardware::on_init(const hardware_interface::HardwareInfo & info)
     return CallbackReturn::ERROR;
 
   port_ = info.hardware_parameters.at("port");
+  limit_=0;
 
   if (info.hardware_parameters.count("limit"))
   {
