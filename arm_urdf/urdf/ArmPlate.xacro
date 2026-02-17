@@ -197,21 +197,14 @@
         <parent link="gripperHousing-v2" />
         <child link="grasp_frame" />
     </joint>
-<joint name="Base_link1-v1_Revolute-1" type="revolute">
-    <origin xyz="-0.05188764 -0.052144760000000005 0.01"
-            rpy="3.141592653589793 -0.0 -0.05" />
-    
-    <parent link="Base_link1-v1" />
-    <child link="2ndDOFDDD-v1" />
-    
-    <axis xyz="0.0 -1.158152704299605e-16 1.0" />
-    <limit
-        lower="0.174533"
-        upper="6.108652"
-        effort="10.0"
-        velocity="100.0" />
 
-</joint>
+    <joint name="Base_link1-v1_Revolute-1" type="revolute">
+        <origin xyz="-0.05188764 -0.052144760000000005 0.01" rpy="3.141592653589793 -0.0 -0.05" />
+        <parent link="Base_link1-v1" />
+        <child link="2ndDOFDDD-v1" />
+        <axis xyz="0.0 -1.158152704299605e-16 1.0" />
+        <limit lower="0.174533" upper="6.108652" effort="10.0" velocity="100.0" />
+    </joint>
 
     <joint name="2ndDOFDDD-v1_Revolute-8" type="revolute">
         <origin xyz="0.052840300000000937 -0.004111319999999985 -0.13483788000000002" rpy="1.5707963267948974 1.5707963267948828 -1.6484463606696926" />
