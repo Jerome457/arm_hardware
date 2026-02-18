@@ -24,7 +24,7 @@ bool Servo::setPosition(float angle_deg) {
     std::ostringstream cmd;
     cmd << "SET_POS " << id_ << " " << angle_deg;
 
-    std::cout<<cmd.str()<<'\n';
+    //std::cout<<cmd.str()<<'\n';
 
     if (!serial_.writeLine(cmd.str()))
         return false;

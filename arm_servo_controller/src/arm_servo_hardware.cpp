@@ -61,11 +61,11 @@ ArmServoHardware::on_init(const hardware_interface::HardwareInfo & info)
     servo_ids_.push_back(id);
 
     auto servo = std::make_unique<motion_sdk::Servo>(*serial_, id);
-    if (!servo->ping())
-    {
-      RCLCPP_ERROR(logger_, "Servo ping failed id=%d", id);
-      return CallbackReturn::ERROR;
-    }
+    // if (!servo->ping())
+    // {
+    //   RCLCPP_ERROR(logger_, "Servo ping failed id=%d", id);
+    //   return CallbackReturn::ERROR;
+    // }
     // RCLCPP_INFO(logger_, "FAKE INIT for testing");
 
     servos_.push_back(std::move(servo));
