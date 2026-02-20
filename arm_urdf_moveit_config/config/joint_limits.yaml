@@ -15,36 +15,36 @@ joint_limits:
     max_acceleration: 0.1
   5thDof_mnt-v2_Revolute-11:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   6Thdof-v2_Revolute-12:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   Base_link1-v1_Revolute-1:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   gripperHousing-v2_Slider-13:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   gripperHousing-v2_Slider-14:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   lnk1assm-v2_Revolute-9:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2
   lnk2_assm-v2_Revolute-10:
     has_velocity_limits: true
-    max_velocity:  0.25
+    max_velocity:  0.5
     has_acceleration_limits: true
-    max_acceleration: 0.1
+    max_acceleration: 0.2

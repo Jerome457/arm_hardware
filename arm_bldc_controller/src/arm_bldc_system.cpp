@@ -64,6 +64,8 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
   cmd_vel_.resize(joints, 0.0);
   cmd_eff_.resize(joints, 0.0);
 
+  offset_={-1.71195650100708,-15.404742240905762,164.88568115234375};
+
   iface_ = new USBInterface();
   iface_->initInterface(device_);
 
@@ -82,8 +84,8 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
     actuators_[i]->getOutputPosition(&p);
     actuators_[i]->getOutputVelocity(&v);
     actuators_[i]->getOutputTorque(&t);
-
-    pos_[i] = p * DEG2RAD;
+    offset_[i] +=p;
+    pos_[i] = (p-offset_[node_ids_[i]]) * DEG2RAD;
     vel_[i] = v * DEG2RAD;
     eff_[i] = t;
   }
@@ -163,7 +165,7 @@ ArmBLDCSystem::read(const rclcpp::Time &, const rclcpp::Duration &)
 
     if(0<errorCode && errorCode<=256) RCLCPP_WARN(rclcpp::get_logger("ArmBLDCSystem"), "Motor no:%i CODE :%i", i, errorCode);
 
-    pos_[i] = p * DEG2RAD;
+    pos_[i] = (p-offset_[node_ids_[i]]) * DEG2RAD;
     vel_[i] = v * DEG2RAD;
     eff_[i] = t;
     message.data.push_back(id);
@@ -179,7 +181,7 @@ ArmBLDCSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
 {
   for (size_t i = 0; i < actuators_.size(); ++i) {
     actuators_[i]->setPositionControl(
-      static_cast<float>(cmd_pos_[i] * RAD2DEG),
+      static_cast<float>((cmd_pos_[i] * RAD2DEG)+ offset_[node_ids_[i]]),
       40.0f
     );
   }

@@ -61,17 +61,32 @@ ArmServoHardware::on_init(const hardware_interface::HardwareInfo & info)
     servo_ids_.push_back(id);
 
     auto servo = std::make_unique<motion_sdk::Servo>(*serial_, id);
-    // if (!servo->ping())
-    // {
-    //   RCLCPP_ERROR(logger_, "Servo ping failed id=%d", id);
-    //   return CallbackReturn::ERROR;
-    // }
-    // RCLCPP_INFO(logger_, "FAKE INIT for testing");
-
     servos_.push_back(std::move(servo));
   }
 
-  RCLCPP_INFO(logger_, "Arm servo hardware initialized (%ld joints)", num_joints_);
+  for (size_t i = 0; i < num_joints_; ++i)
+  {
+    float deg{}, eff{}, spd{};
+
+    // Read actual hardware position
+    servos_[i]->getPosition(deg);
+    servos_[i]->getEffort(eff);
+    servos_[i]->getSpeed(spd);
+
+    if (servo_ids_[i] == gripper_id_)
+    {
+      position_state_[i] = angle_to_distance(deg);
+    }
+    else
+    {
+      position_state_[i] = deg * M_PI / 180.0;
+    }
+
+    velocity_state_[i] = spd;
+    effort_state_[i] = eff;
+    position_command_[i] = position_state_[i];
+  }
+    RCLCPP_INFO(logger_, "Arm servo hardware initialized (%ld joints)", num_joints_);
   return CallbackReturn::SUCCESS;
 }
 

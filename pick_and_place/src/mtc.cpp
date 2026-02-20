@@ -121,7 +121,7 @@ void MTCTaskNode::setupPlanningScene(
   ground_shape.dimensions = {4.0, 4.0, 0.01};  // large thin box
 
   geometry_msgs::msg::Pose ground_pose;
-  ground_pose.position.z = -0.1;  // top of ground at z=0
+  ground_pose.position.z = -0.15;  // top of ground at z=0
   ground_pose.orientation.w = 1.0;
 
   ground.primitives.push_back(ground_shape);

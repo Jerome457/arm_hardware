@@ -60,6 +60,7 @@ private:
 
   std::vector<double> pos_, vel_, eff_;
   std::vector<double> cmd_pos_, cmd_vel_, cmd_eff_;
+  std::vector<double> offset_;
 
   std::string device_{"/dev/ttyACM0"};
 };
