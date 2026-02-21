@@ -25,12 +25,12 @@
         <joint name="gripperHousing-v2_Slider-13" value="0.0"/>
     </group_state>
     <group_state name="cam" group="arm">
-        <joint name="2ndDOFDDD-v1_Revolute-8" value="1.62"/>
+        <joint name="2ndDOFDDD-v1_Revolute-8" value="1.572"/>
         <joint name="5thDof_mnt-v2_Revolute-11" value="0"/>
         <joint name="6Thdof-v2_Revolute-12" value="0.1"/>
         <joint name="Base_link1-v1_Revolute-1" value="4.71239"/>
-        <joint name="lnk1assm-v2_Revolute-9" value="0"/>
-        <joint name="lnk2_assm-v2_Revolute-10" value="0"/>
+        <joint name="lnk1assm-v2_Revolute-9" value="-2.395"/>
+        <joint name="lnk2_assm-v2_Revolute-10" value="0.0"/>
     </group_state>
     <group_state name="place" group="arm">
         <joint name="2ndDOFDDD-v1_Revolute-8" value="2.334"/>

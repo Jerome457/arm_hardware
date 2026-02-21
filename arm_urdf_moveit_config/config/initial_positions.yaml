@@ -6,5 +6,5 @@ initial_positions:
   6Thdof-v2_Revolute-12: 1.572
   Base_link1-v1_Revolute-1: 0.7
   gripperHousing-v2_Slider-13: 0
-  lnk1assm-v2_Revolute-9: 0
-  lnk2_assm-v2_Revolute-10: 0
+  lnk1assm-v2_Revolute-9: -2.395
+  lnk2_assm-v2_Revolute-10: 1.614

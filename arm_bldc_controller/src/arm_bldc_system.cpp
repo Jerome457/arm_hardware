@@ -184,7 +184,7 @@ ArmBLDCSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
   for (size_t i = 0; i < actuators_.size(); ++i) {
     actuators_[i]->setPositionControl(
       static_cast<float>((cmd_pos_[i] * RAD2DEG)+ offset_[node_ids_[i]]),
-      40.0f
+      20.0f
     );
   }
   return hardware_interface::return_type::OK;
