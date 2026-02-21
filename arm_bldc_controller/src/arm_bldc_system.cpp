@@ -98,9 +98,16 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
 hardware_interface::CallbackReturn
 ArmBLDCSystem::on_activate(const rclcpp_lifecycle::State &)
 {
-  for (auto *act : actuators_) {
-    // act->clearActuatorErrors();
-    act->setDeviceToActive();
+  for (size_t i = 0; i < actuators_.size(); ++i) {
+    actuators_[i]->setDeviceToActive();
+
+    if (node_ids_[i] == 2) {
+      // Move +10 degrees from current position
+      cmd_pos_[i] = pos_[i] + (10.0 * DEG2RAD);
+
+      // Optional: set a safe velocity
+      cmd_vel_[i] = 20.0 * DEG2RAD;  // 20 deg/sec
+    }
   }
   return CallbackReturn::SUCCESS;
 }
@@ -184,7 +191,7 @@ ArmBLDCSystem::write(const rclcpp::Time &, const rclcpp::Duration &)
   for (size_t i = 0; i < actuators_.size(); ++i) {
     actuators_[i]->setPositionControl(
       static_cast<float>((cmd_pos_[i] * RAD2DEG)+ offset_[node_ids_[i]]),
-      20.0f
+      static_cast<float>(cmd_vel_[i] * RAD2DEG)
     );
   }
   return hardware_interface::return_type::OK;

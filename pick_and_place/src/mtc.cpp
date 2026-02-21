@@ -219,7 +219,7 @@ mtc::Task MTCTaskNode::createTask()
   task.stages()->setName("demo task");
   task.loadRobotModel(node_);
 
-  const auto& arm_group_name = "arm";
+  const auto& arm_group_name = "arm_hand";
   const auto& hand_group_name = "hand";
   const auto& hand_frame = "grasp_frame";
 

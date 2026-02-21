@@ -6,6 +6,12 @@ controller_manager:
     arm_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    nmotion_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    servo_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
 
     hand_controller:
       type: position_controllers/GripperActionController
@@ -20,14 +26,35 @@ arm_controller:
     joints:
       - Base_link1-v1_Revolute-1
       - 2ndDOFDDD-v1_Revolute-8
-      - lnk1assm-v2_Revolute-9
-      - lnk2_assm-v2_Revolute-10
-      - 5thDof_mnt-v2_Revolute-11
-      - 6Thdof-v2_Revolute-12
     command_interfaces:
       - position
     state_interfaces:
       - position
+
+nmotion_controller:
+  ros__parameters:
+    acrion_ns: follow_joint_trajectory
+    joints:
+      - lnk1assm-v2_Revolute-9
+      - lnk2_assm-v2_Revolute-10
+      - 5thDof_mnt-v2_Revolute-11
+    command_interfaces:
+      - position
+      - velocity
+    state_interfaces:
+      - position
+      - velocity
+
+servo_controller:
+  ros__parameters:
+    acrion_ns: follow_joint_trajectory
+    joints:
+    - 6Thdof-v2_Revolute-12
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      
 hand_controller:
   ros__parameters:
     acrion_ns: gripper_cmd

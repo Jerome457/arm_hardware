@@ -9,6 +9,8 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 moveit_simple_controller_manager:
   controller_names:
     - arm_controller
+    - nmotion_controller
+    - servo_controller
     - hand_controller
 
   arm_controller:
@@ -17,9 +19,19 @@ moveit_simple_controller_manager:
     joints:
       - Base_link1-v1_Revolute-1
       - 2ndDOFDDD-v1_Revolute-8
+
+  nmotion_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    joints:
       - lnk1assm-v2_Revolute-9
       - lnk2_assm-v2_Revolute-10
       - 5thDof_mnt-v2_Revolute-11
+
+  servo_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    joints:
       - 6Thdof-v2_Revolute-12
   hand_controller:
     type: GripperCommand
