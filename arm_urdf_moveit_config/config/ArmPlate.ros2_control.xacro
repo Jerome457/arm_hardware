@@ -16,14 +16,14 @@
                 <param name="id">5</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['6Thdof-v2_Revolute-12']}</param>
+                  <!-- <param name="initial_value">${initial_positions['6Thdof-v2_Revolute-12']}</param> -->
                 </state_interface>
             </joint>
             <joint name="gripperHousing-v2_Slider-13">
                 <param name="id">9</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['gripperHousing-v2_Slider-13']}</param>
+                  <!-- <param name="initial_value">${initial_positions['gripperHousing-v2_Slider-13']}</param> -->
                 </state_interface>
             </joint>
         </ros2_control>
@@ -40,21 +40,21 @@
                 <param name="node_id">2</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['lnk1assm-v2_Revolute-9']}</param>
+                  <!-- <param name="initial_value">${initial_positions['lnk1assm-v2_Revolute-9']}</param> -->
                 </state_interface>
             </joint>
             <joint name="lnk2_assm-v2_Revolute-10">
                 <param name="node_id">1</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['lnk2_assm-v2_Revolute-10']}</param>
+                  <!-- <param name="initial_value">${initial_positions['lnk2_assm-v2_Revolute-10']}</param> -->
                 </state_interface>
             </joint>
             <joint name="5thDof_mnt-v2_Revolute-11">
                 <param name="node_id">0</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['5thDof_mnt-v2_Revolute-11']}</param>
+                  <!-- <param name="initial_value">${initial_positions['5thDof_mnt-v2_Revolute-11']}</param> -->
                 </state_interface>
             </joint>
         </ros2_control>

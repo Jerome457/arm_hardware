@@ -64,7 +64,7 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
   cmd_vel_.resize(joints, 0.0);
   cmd_eff_.resize(joints, 0.0);
 
-  offset_={-1.71195650100708,-15.404742240905762,164.88568115234375};
+  offset_={-7.6770548820495605,-1.7062245607376099,170.88568115234375};
 
   iface_ = new USBInterface();
   iface_->initInterface(device_);
@@ -84,7 +84,9 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
     actuators_[i]->getOutputPosition(&p);
     actuators_[i]->getOutputVelocity(&v);
     actuators_[i]->getOutputTorque(&t);
-    offset_[i] +=p;
+    // if(node_ids_[i]==2){
+    //   offset_[node_ids_[i]] +=p;
+    // }
     pos_[i] = (p-offset_[node_ids_[i]]) * DEG2RAD;
     vel_[i] = v * DEG2RAD;
     eff_[i] = t;
