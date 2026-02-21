@@ -2,7 +2,7 @@
 
 # For beginners, we downscale velocity and acceleration limits.
 # You can always specify higher scaling factors (<= 1.0) in your motion requests.  # Increase the values below to 1.0 to always move at maximum speed.
-default_velocity_scaling_factor: 0.5
+default_velocity_scaling_factor: 0.8
 default_acceleration_scaling_factor: 0.8
 
 # Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
@@ -10,19 +10,19 @@ default_acceleration_scaling_factor: 0.8
 joint_limits:
   2ndDOFDDD-v1_Revolute-8:
     has_velocity_limits: true
-    max_velocity:  0.04
+    max_velocity:  0.09
     has_acceleration_limits: true
     max_acceleration: 0.1
   5thDof_mnt-v2_Revolute-11:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  2.5
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 1.5
   6Thdof-v2_Revolute-12:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  2.5
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 1.5
   Base_link1-v1_Revolute-1:
     has_velocity_limits: true
     max_velocity:  0.5
@@ -37,14 +37,14 @@ joint_limits:
     has_velocity_limits: true
     max_velocity:  2.0
     has_acceleration_limits: true
-    max_acceleration: 0.8
+    max_acceleration: 1.0
   lnk1assm-v2_Revolute-9:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  2.5
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 1.5
   lnk2_assm-v2_Revolute-10:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  2.5
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 1.5

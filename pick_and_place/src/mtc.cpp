@@ -208,8 +208,77 @@ void MTCTaskNode::doTask()
     e=1;
     return;
   }
-  e=0;
+  
+ auto move_group =
+  std::make_shared<moveit::planning_interface::MoveGroupInterface>(
+      node_, "arm_hand");
 
+auto gripper_group =
+  std::make_shared<moveit::planning_interface::MoveGroupInterface>(
+      node_, "hand");
+
+move_group->setPlannerId("TRRTkConfigDefault");
+
+gripper_group->setNamedTarget("close");
+auto grip_close_result = gripper_group->move();
+
+if (grip_close_result != moveit::core::MoveItErrorCode::SUCCESS)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Failed to close gripper");
+  return;
+}
+
+move_group->setNamedTarget("place");
+moveit::planning_interface::MoveGroupInterface::Plan plan;
+
+bool plan_success =
+    (move_group->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+
+if (!plan_success)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Planning to place failed");
+  return;
+}
+
+auto exec_result = move_group->execute(plan);
+
+if (exec_result != moveit::core::MoveItErrorCode::SUCCESS)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Execution to place failed");
+  return;
+}
+
+gripper_group->setNamedTarget("open");
+auto grip_open_result = gripper_group->move();
+
+if (grip_open_result != moveit::core::MoveItErrorCode::SUCCESS)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Failed to open gripper");
+  return;
+}
+
+
+move_group->setNamedTarget("cam");
+
+bool plan_success2 =
+    (move_group->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+
+if (!plan_success2)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
+  return;
+}
+
+auto move_result = move_group->move();
+
+if (move_result != moveit::core::MoveItErrorCode::SUCCESS)
+{
+  RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
+  return;
+}
+
+RCLCPP_INFO(node_->get_logger(), "Full sequence completed successfully");
+  e=0;
   return;
 }
 
@@ -233,7 +302,6 @@ mtc::Task MTCTaskNode::createTask()
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
   mtc::Stage* current_state_ptr = nullptr;
-  mtc::Stage* attach_object_stage =nullptr;
 #pragma GCC diagnostic pop
 
   auto stage_state_current = std::make_unique<mtc::stages::CurrentState>("current");
@@ -321,88 +389,7 @@ task.add(std::move(stage_move_to_pick));
         stage->allowCollisions("object", "<octomap>", true);
         grasp->insert(std::move(stage));
       }
-
-      {
-        auto stage = std::make_unique<mtc::stages::MoveTo>("close hand", interpolation_planner);
-        stage->setGroup(hand_group_name);
-        stage->setGoal("close");
-        grasp->insert(std::move(stage));
-      }
-
-      {
-        auto stage = std::make_unique<mtc::stages::ModifyPlanningScene>("attach object");
-        stage->attachObject("object", hand_frame);
-        attach_object_stage = stage.get();
-        grasp->insert(std::move(stage));
-      }
-
-
-      {
-        auto stage =
-            std::make_unique<mtc::stages::MoveRelative>("lift object", cartesian_planner);
-        stage->properties().configureInitFrom(mtc::Stage::PARENT, { "group" });
-        stage->setMinMaxDistance(0.0, 0.3);
-        stage->setIKFrame(hand_frame);
-        stage->properties().set("marker_ns", "lift_object");
-      
-        // Set upward direction
-        geometry_msgs::msg::Vector3Stamped vec;
-        vec.header.frame_id = "world";
-        vec.vector.z = 0.5;
-        stage->setDirection(vec);
-        grasp->insert(std::move(stage));
-      }
-
       task.add(std::move(grasp));
-    }
-
-    {
-      auto stage_move_to_place = std::make_unique<mtc::stages::MoveTo>("place pose", sampling_planner);
-      stage_move_to_place->setGroup(arm_group_name);
-      stage_move_to_place->setGoal("place");
-      stage_move_to_place->setTimeout(100.0);
-      task.add(std::move(stage_move_to_place));
-    }
-    {
-      auto stage = std::make_unique<mtc::stages::MoveTo>("open hand", interpolation_planner);
-      stage->setGroup(hand_group_name);
-      stage->setGoal("open");
-      task.add(std::move(stage));
-    }
-    {
-      auto stage =
-          std::make_unique<mtc::stages::ModifyPlanningScene>("forbid collision (hand,object)");
-      stage->allowCollisions("object", "right_H-v1", false);
-      stage->allowCollisions("object", "left_H-v1", false);
-      task.add(std::move(stage));
-    }
-
-    {
-      auto stage = std::make_unique<mtc::stages::ModifyPlanningScene>("detach object");
-      stage->detachObject("object", hand_frame);
-      task.add(std::move(stage));
-    }
-
-    {
-      auto stage = std::make_unique<mtc::stages::MoveRelative>("retreat", cartesian_planner);
-      stage->properties().configureInitFrom(mtc::Stage::PARENT, { "group" });
-      stage->setMinMaxDistance(0.0, 0.15);
-      stage->setIKFrame(hand_frame);
-      stage->properties().set("marker_ns", "retreat");
-    
-      // Set retreat direction
-      geometry_msgs::msg::Vector3Stamped vec;
-      vec.header.frame_id = "world";
-      vec.vector.z = 0.05;
-      stage->setDirection(vec);
-      task.add(std::move(stage));
-    }
-    {
-      auto stage = std::make_unique<mtc::stages::MoveTo>("return home", sampling_planner);
-      stage->properties().configureInitFrom(mtc::Stage::PARENT, { "group" });
-      stage->setTimeout(100.0);
-      stage->setGoal("cam");
-      task.add(std::move(stage));
     }
   return task;
 }
