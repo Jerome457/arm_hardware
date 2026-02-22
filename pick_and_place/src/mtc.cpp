@@ -287,23 +287,23 @@ auto gripper_group =
 
   move_group->setNamedTarget("cam");
 
-  bool arm_plan_success2 =
-      (move_group->plan(arm_plan) ==
-      moveit::core::MoveItErrorCode::SUCCESS);
+  // bool arm_plan_success2 =
+  //     (move_group->plan(arm_plan) ==
+  //     moveit::core::MoveItErrorCode::SUCCESS);
 
-  if (!arm_plan_success2)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
-    return;
-  }
+  // if (!arm_plan_success2)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
+  //   return;
+  // }
 
-  auto arm_exec_result2 = move_group->execute(arm_plan);
+  // auto arm_exec_result2 = move_group->execute(arm_plan);
 
-  if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
-    return;
-  }
+  // if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
+  //   return;
+  // }
 
   RCLCPP_INFO(node_->get_logger(), "Full sequence completed successfully");
 
@@ -332,6 +332,9 @@ mtc::Task MTCTaskNode::createTask()
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
   mtc::Stage* current_state_ptr = nullptr;
 #pragma GCC diagnostic pop
+  mtc::Stage* attach_object_stage =
+      nullptr;  // Forward attach_object_stage to place pose generator
+  // clang-format on
 
   auto stage_state_current = std::make_unique<mtc::stages::CurrentState>("current");
   current_state_ptr = stage_state_current.get();
@@ -417,6 +420,13 @@ task.add(std::move(stage_move_to_pick));
         // stage->allowCollisions("firstDOF_final", "soft_finger_2", true);
         stage->allowCollisions("object", "<octomap>", true);
         grasp->insert(std::move(stage));
+      }
+
+      {
+      auto stage = std::make_unique<mtc::stages::ModifyPlanningScene>("attach object");
+      stage->attachObject("object", hand_frame);
+      attach_object_stage = stage.get();
+      grasp->insert(std::move(stage));
       }
       task.add(std::move(grasp));
     }

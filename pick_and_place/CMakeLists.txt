@@ -21,11 +21,15 @@ find_package(moveit_ros_planning REQUIRED)
 find_package(arm_message REQUIRED)
 
 add_executable(mtc_tutorial src/mtc.cpp)
-
 ament_target_dependencies(mtc_tutorial moveit_task_constructor_core rclcpp arm_message)
 
+
+add_executable(place src/place.cpp)
+ament_target_dependencies(place moveit_task_constructor_core rclcpp arm_message)
+
+
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}/)
-install(TARGETS mtc_tutorial DESTINATION lib/${PROJECT_NAME})
+install(TARGETS mtc_tutorial place DESTINATION lib/${PROJECT_NAME})
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)

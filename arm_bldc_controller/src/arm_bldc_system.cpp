@@ -6,39 +6,37 @@
 #include <limits.h>
 #include <unistd.h>
 #include <iostream>
+#include <sys/stat.h>
 
 namespace arm_bldc_controller
 {
 
-std::string resolveToACM(const std::string& path)
+
+std::string resolveToSerial(const std::string& path)
 {
     char resolved[PATH_MAX];
 
-    // Resolve symlink -> real device
-    if (realpath(path.c_str(), resolved))
-    {
-        std::string real_dev = resolved;
-
-        // Safety: check it's actually ACM
-        if (real_dev.find("ttyACM") != std::string::npos)
-        {
-            std::cout << "[PortResolver] " << path
-                      << " -> " << real_dev << std::endl;
-            return real_dev;
-        }
-        else
-        {
-            std::cerr << "[PortResolver] WARNING: Not ACM: "
-                      << real_dev << std::endl;
-            return real_dev; // still return
-        }
+    if (!realpath(path.c_str(), resolved)) {
+        throw std::runtime_error("Cannot resolve device path: " + path);
     }
 
-    // If resolving failed, use original
-    std::cerr << "[PortResolver] WARNING: Could not resolve "
-              << path << ", using as-is" << std::endl;
+    std::string real_dev = resolved;
 
-    return path;
+    struct stat st;
+    if (stat(real_dev.c_str(), &st) != 0) {
+        throw std::runtime_error("Device does not exist: " + real_dev);
+    }
+
+    if (!S_ISCHR(st.st_mode)) {
+        throw std::runtime_error("Not a character device: " + real_dev);
+    }
+
+    if (access(real_dev.c_str(), R_OK | W_OK) != 0) {
+        throw std::runtime_error("No read/write permission: " + real_dev);
+    }
+
+    std::cout << "[PortResolver] Using device: " << real_dev << std::endl;
+    return real_dev;
 }
 
 hardware_interface::CallbackReturn
@@ -52,7 +50,7 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
     device_ = info.hardware_parameters.at("device");
   }
 
-  device_= resolveToACM(device_);
+  device_= resolveToSerial(device_);
 
   size_t joints = info.joints.size();
 
@@ -103,7 +101,7 @@ ArmBLDCSystem::on_activate(const rclcpp_lifecycle::State &)
 
     if (node_ids_[i] == 2) {
       // Move +10 degrees from current position
-      cmd_pos_[i] = pos_[i] + (10.0 * DEG2RAD);
+      cmd_pos_[i] = pos_[i] + (30.0 * DEG2RAD);
 
       // Optional: set a safe velocity
       cmd_vel_[i] = 20.0 * DEG2RAD;  // 20 deg/sec
