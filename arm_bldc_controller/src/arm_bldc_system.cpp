@@ -64,7 +64,7 @@ ArmBLDCSystem::on_init(const hardware_interface::HardwareInfo & info)
   cmd_vel_.resize(joints, 0.0);
   cmd_eff_.resize(joints, 0.0);
 
-  offset_={-7.6770548820495605,-1.7062245607376099,170.88568115234375};
+  offset_={-9.6770548820495605,-1.7062245607376099,170.88568115234375};
 
   iface_ = new USBInterface();
   iface_->initInterface(device_);

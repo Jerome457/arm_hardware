@@ -209,7 +209,7 @@ void MTCTaskNode::doTask()
     return;
   }
   
- auto move_group =
+auto move_group =
   std::make_shared<moveit::planning_interface::MoveGroupInterface>(
       node_, "arm_hand");
 
@@ -217,67 +217,96 @@ auto gripper_group =
   std::make_shared<moveit::planning_interface::MoveGroupInterface>(
       node_, "hand");
 
-move_group->setPlannerId("TRRTkConfigDefault");
+  move_group->setPlannerId("TRRTkConfigDefault");
 
-gripper_group->setNamedTarget("close");
-auto grip_close_result = gripper_group->move();
+  moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
+  moveit::planning_interface::MoveGroupInterface::Plan grip_plan;
 
-if (grip_close_result != moveit::core::MoveItErrorCode::SUCCESS)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Failed to close gripper");
-  return;
-}
+  gripper_group->setNamedTarget("close");
+  rclcpp::sleep_for(std::chrono::seconds(5));
 
-move_group->setNamedTarget("place");
-moveit::planning_interface::MoveGroupInterface::Plan plan;
+  bool grip_plan_success =
+      (gripper_group->plan(grip_plan) ==
+      moveit::core::MoveItErrorCode::SUCCESS);
 
-bool plan_success =
-    (move_group->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+  if (!grip_plan_success)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Gripper close planning failed");
+    return;
+  }
 
-if (!plan_success)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Planning to place failed");
-  return;
-}
+  auto grip_exec_result = gripper_group->execute(grip_plan);
 
-auto exec_result = move_group->execute(plan);
+  if (grip_exec_result != moveit::core::MoveItErrorCode::SUCCESS)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Gripper close execution failed");
+    return;
+  }
 
-if (exec_result != moveit::core::MoveItErrorCode::SUCCESS)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Execution to place failed");
-  return;
-}
+  move_group->setNamedTarget("place");
 
-gripper_group->setNamedTarget("open");
-auto grip_open_result = gripper_group->move();
+  bool arm_plan_success =
+      (move_group->plan(arm_plan) ==
+      moveit::core::MoveItErrorCode::SUCCESS);
 
-if (grip_open_result != moveit::core::MoveItErrorCode::SUCCESS)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Failed to open gripper");
-  return;
-}
+  if (!arm_plan_success)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Planning to place failed");
+    return;
+  }
 
+  auto arm_exec_result = move_group->execute(arm_plan);
 
-move_group->setNamedTarget("cam");
+  if (arm_exec_result != moveit::core::MoveItErrorCode::SUCCESS)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Execution to place failed");
+    return;
+  }
 
-bool plan_success2 =
-    (move_group->plan(plan) == moveit::core::MoveItErrorCode::SUCCESS);
+  gripper_group->setNamedTarget("open");
 
-if (!plan_success2)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
-  return;
-}
+  bool grip_plan_success2 =
+      (gripper_group->plan(grip_plan) ==
+      moveit::core::MoveItErrorCode::SUCCESS);
 
-auto move_result = move_group->move();
+  if (!grip_plan_success2)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Gripper open planning failed");
+    return;
+  }
 
-if (move_result != moveit::core::MoveItErrorCode::SUCCESS)
-{
-  RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
-  return;
-}
+  rclcpp::sleep_for(std::chrono::seconds(5));
 
-RCLCPP_INFO(node_->get_logger(), "Full sequence completed successfully");
+  auto grip_exec_result2 = gripper_group->execute(grip_plan);
+
+  if (grip_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Gripper open execution failed");
+    return;
+  }
+
+  move_group->setNamedTarget("cam");
+
+  bool arm_plan_success2 =
+      (move_group->plan(arm_plan) ==
+      moveit::core::MoveItErrorCode::SUCCESS);
+
+  if (!arm_plan_success2)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
+    return;
+  }
+
+  auto arm_exec_result2 = move_group->execute(arm_plan);
+
+  if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
+    return;
+  }
+
+  RCLCPP_INFO(node_->get_logger(), "Full sequence completed successfully");
+
   e=0;
   return;
 }
