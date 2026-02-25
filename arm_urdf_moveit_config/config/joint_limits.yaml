@@ -10,7 +10,7 @@ default_acceleration_scaling_factor: 0.8
 joint_limits:
   2ndDOFDDD-v1_Revolute-8:
     has_velocity_limits: true
-    max_velocity:  0.09
+    max_velocity:  0.1
     has_acceleration_limits: true
     max_acceleration: 0.1
   5thDof_mnt-v2_Revolute-11:
@@ -30,12 +30,12 @@ joint_limits:
     max_acceleration: 0.2
   gripperHousing-v2_Slider-13:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  0.01
     has_acceleration_limits: true
     max_acceleration: 1.0
   gripperHousing-v2_Slider-14:
     has_velocity_limits: true
-    max_velocity:  2.0
+    max_velocity:  0.01
     has_acceleration_limits: true
     max_acceleration: 1.0
   lnk1assm-v2_Revolute-9:

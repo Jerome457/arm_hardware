@@ -48,6 +48,8 @@ ArmServoHardware::on_init(const hardware_interface::HardwareInfo & info)
 
   port_ = info_.hardware_parameters.at("port");
 
+  grip_status=0;
+
   serial_ = std::make_unique<motion_sdk::USBSerial>(port_, 115200);
   if (!serial_->open())
   {
@@ -142,8 +144,22 @@ ArmServoHardware::write(const rclcpp::Time &, const rclcpp::Duration &)
   {
     // position_command_[i] = std::clamp(position_command_[i], 0.0, 300);
     if(servo_ids_[i]==gripper_id_){
-      servos_[i]->setPosition(distance_to_angle(position_command_[i]));
-    }else{
+      if(std::abs(position_command_[i] + 0.04)<=0.01){
+        grip=1;
+      }
+      else{
+        grip=0;
+      }
+      if(grip && !grip_status){
+        servos_[i]->grip();
+          grip_status=1;
+      }
+      else if (!grip){
+        grip_status=0;
+        servos_[i]->setPosition(distance_to_angle(position_command_[i]));
+      }
+    }
+    else{
       servos_[i]->setPosition((position_command_[i])*180/M_PI);
     }
   }

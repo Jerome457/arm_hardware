@@ -59,3 +59,5 @@ hand_controller:
   ros__parameters:
     acrion_ns: gripper_cmd
     joint: gripperHousing-v2_Slider-13
+    allow_stalling: true
+    stall_timeout: 10.0

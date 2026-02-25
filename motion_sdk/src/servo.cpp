@@ -89,5 +89,25 @@ bool Servo::getSpeed(float& speed) {
         return false;
     }
     return true;        
+}
+bool Servo::grip(){
+    std::ostringstream cmd;
+    cmd << "GRIP " << id_ <<" 215 ";
+    if (!serial_.writeLine(cmd.str()))
+        return false;
+    return true;
+} 
+
+bool Servo::readGrip(float& angle_deg){
+    std::string resp;
+    if (!serial_.readLine(resp))
+        return false;
+
+    try {
+        angle_deg = std::stof(resp);
+    } catch (...) {
+        return false;
+    }
+    return true;
 } 
 } // namespace motion_sdk

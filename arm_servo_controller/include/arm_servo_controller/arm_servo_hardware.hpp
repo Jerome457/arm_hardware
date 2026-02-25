@@ -49,6 +49,8 @@ private:
 
   double meters_to_degrees(double m) const { return (m / 0.04) * 90.0; }
   double degrees_to_meters(double d) const { return (d / 90.0) * 0.04; }
+  bool grip_status;
+  bool grip;
 };
 
 }  // namespace arm_servo_controller

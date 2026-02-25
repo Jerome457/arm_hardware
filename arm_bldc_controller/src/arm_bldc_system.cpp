@@ -7,36 +7,41 @@
 #include <unistd.h>
 #include <iostream>
 #include <sys/stat.h>
-
+#include <chrono>
+#include <fcntl.h>
 namespace arm_bldc_controller
 {
 
+  std::string resolveToSerial(const std::string& path)
+  {
+      char resolved[PATH_MAX];
 
-std::string resolveToSerial(const std::string& path)
-{
-    char resolved[PATH_MAX];
+      if (!realpath(path.c_str(), resolved)) {
+          throw std::runtime_error("Cannot resolve device path: " + path);
+      }
 
-    if (!realpath(path.c_str(), resolved)) {
-        throw std::runtime_error("Cannot resolve device path: " + path);
-    }
+      std::string real_dev = resolved;
 
-    std::string real_dev = resolved;
+      while (true)
+      {
+          struct stat st;
+          if (stat(real_dev.c_str(), &st) == 0 &&
+              S_ISCHR(st.st_mode) &&
+              access(real_dev.c_str(), R_OK | W_OK) == 0)
+          {
+              int fd = open(real_dev.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
+              if (fd >= 0)
+              {
+                  close(fd);
+                  std::cout << "[PortResolver] Device ready: "
+                            << real_dev << std::endl;
+                  return real_dev;
+              }
+          }
 
-    struct stat st;
-    if (stat(real_dev.c_str(), &st) != 0) {
-        throw std::runtime_error("Device does not exist: " + real_dev);
-    }
-
-    if (!S_ISCHR(st.st_mode)) {
-        throw std::runtime_error("Not a character device: " + real_dev);
-    }
-
-    if (access(real_dev.c_str(), R_OK | W_OK) != 0) {
-        throw std::runtime_error("No read/write permission: " + real_dev);
-    }
-
-    std::cout << "[PortResolver] Using device: " << real_dev << std::endl;
-    return real_dev;
+          // Small blocking delay
+          usleep(200000); // 200ms
+      }
 }
 
 hardware_interface::CallbackReturn
