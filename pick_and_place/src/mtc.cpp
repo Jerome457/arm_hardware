@@ -287,25 +287,25 @@ auto gripper_group =
     return;
   }
 
-  move_group->setNamedTarget("cam");
+  // move_group->setNamedTarget("cam");
 
-  bool arm_plan_success2 =
-      (move_group->plan(arm_plan) ==
-      moveit::core::MoveItErrorCode::SUCCESS);
+  // bool arm_plan_success2 =
+  //     (move_group->plan(arm_plan) ==
+  //     moveit::core::MoveItErrorCode::SUCCESS);
 
-  if (!arm_plan_success2)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
-    return;
-  }
+  // if (!arm_plan_success2)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
+  //   return;
+  // }
 
-  auto arm_exec_result2 = move_group->execute(arm_plan);
+  // auto arm_exec_result2 = move_group->execute(arm_plan);
 
-  if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
-    return;
-  }
+  // if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
+  //   return;
+  // }
 
   RCLCPP_INFO(node_->get_logger(), "Full sequence completed successfully");
 

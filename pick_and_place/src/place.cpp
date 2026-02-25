@@ -68,6 +68,27 @@ void MTCTaskNode::setupPlanningScene()
 
 void MTCTaskNode::doTask()
 {
+
+  auto gripper_group =
+  std::make_shared<moveit::planning_interface::MoveGroupInterface>(
+      node_, "hand");
+  moveit::planning_interface::MoveGroupInterface::Plan grip_plan;
+  gripper_group->setNamedTarget("close");
+
+  bool grip_plan_success =
+      (gripper_group->plan(grip_plan) ==
+      moveit::core::MoveItErrorCode::SUCCESS);
+
+  if (!grip_plan_success)
+  {
+    RCLCPP_ERROR(node_->get_logger(), "Gripper close planning failed");
+    return;
+  }
+
+  auto grip_exec_result = gripper_group->execute(grip_plan);
+
+  rclcpp::sleep_for(std::chrono::seconds(5));
+
   task_ = createTask();
 
   try
@@ -80,7 +101,7 @@ void MTCTaskNode::doTask()
     return;
   }
 
-  if (!task_.plan(5 /* max_solutions */))
+  if (!task_.plan(2 /* max_solutions */))
   {
     RCLCPP_ERROR_STREAM(LOGGER, "Task planning failed");
     return;
@@ -93,29 +114,6 @@ void MTCTaskNode::doTask()
     RCLCPP_ERROR_STREAM(LOGGER, "Task execution failed");
     return;
   }
-
-  moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
-    auto move_group =
-    std::make_shared<moveit::planning_interface::MoveGroupInterface>(
-    node_, "arm_hand");
-  bool arm_plan_success2 =
-      (move_group->plan(arm_plan) ==
-      moveit::core::MoveItErrorCode::SUCCESS);
-
-  if (!arm_plan_success2)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Planning to cam failed");
-    return;
-  }
-
-  auto arm_exec_result2 = move_group->execute(arm_plan);
-
-  if (arm_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Move to cam failed");
-    return;
-  }
-
 
   return;
 }
@@ -141,20 +139,13 @@ mtc::Task MTCTaskNode::createTask()
   task.add(std::move(stage_state_current));
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_);
+  sampling_planner->setPlannerId("TRRTkConfigDefault");
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();
 
   auto cartesian_planner = std::make_shared<mtc::solvers::CartesianPath>();
   cartesian_planner->setMaxVelocityScalingFactor(1.0);
   cartesian_planner->setMaxAccelerationScalingFactor(1.0);
   cartesian_planner->setStepSize(.01);
-
-  // clang-format off
-  auto stage_close_hand =
-      std::make_unique<mtc::stages::MoveTo>("close hand", interpolation_planner);
-  // clang-format on
-  stage_close_hand->setGroup(hand_group_name);
-  stage_close_hand->setGoal("close");
-  task.add(std::move(stage_close_hand));
 
   // clang-format off
   auto stage_move_to_place = std::make_unique<mtc::stages::Connect>(
@@ -185,10 +176,10 @@ mtc::Task MTCTaskNode::createTask()
 
       geometry_msgs::msg::PoseStamped target_pose_msg;
       target_pose_msg.header.frame_id = "world";
-      target_pose_msg.pose.position.y = 0.0;
-      target_pose_msg.pose.position.x = 0.5;
-      target_pose_msg.pose.position.z = 0.04;
-      target_pose_msg.pose.orientation.w = 1.0;
+        target_pose_msg.pose.position.y = 0.0;
+        target_pose_msg.pose.position.x = 0.5;
+        target_pose_msg.pose.orientation.y = 0.7071;
+        target_pose_msg.pose.orientation.w = 0.7071;
       stage->setPose(target_pose_msg);
       stage->setMonitoredStage(current_state_ptr);  // Hook into attach_object_stage
 
@@ -233,6 +224,12 @@ mtc::Task MTCTaskNode::createTask()
 
     task.add(std::move(place));
   }
+
+  auto home =
+      std::make_unique<mtc::stages::MoveTo>("home", sampling_planner);
+  home->setGroup(arm_group_name);
+  home->setGoal("cam");
+  task.add(std::move(home));
 
   return task;
 }
