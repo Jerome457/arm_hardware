@@ -5,6 +5,7 @@
 #include <moveit/task_constructor/task.h>
 #include <moveit/task_constructor/solvers.h>
 #include <moveit/task_constructor/stages.h>
+#include <arm_message/srv/place.hpp>
 #if __has_include(<tf2_geometry_msgs/tf2_geometry_msgs.hpp>)
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #else
@@ -16,6 +17,7 @@
 #include <tf2_eigen/tf2_eigen.h>
 #endif
 
+int e=1;
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("mtc_tutorial");
 namespace mtc = moveit::task_constructor;
 
@@ -26,20 +28,30 @@ public:
 
   rclcpp::node_interfaces::NodeBaseInterface::SharedPtr getNodeBaseInterface();
 
-  void doTask();
-
-  void setupPlanningScene();
+  void doTask(const geometry_msgs::msg::PoseStamped& pose);
 
 private:
+
+  void handlePlace(
+    const std::shared_ptr<arm_message::srv::Place::Request> request,
+    std::shared_ptr<arm_message::srv::Place::Response> response);
   // Compose an MTC task from a series of stages.
-  mtc::Task createTask();
+  mtc::Task createTask(const geometry_msgs::msg::PoseStamped& pose);
   mtc::Task task_;
   rclcpp::Node::SharedPtr node_;
+  rclcpp::Service<arm_message::srv::Place>::SharedPtr place_service_;
 };
 
 MTCTaskNode::MTCTaskNode(const rclcpp::NodeOptions& options)
   : node_{ std::make_shared<rclcpp::Node>("mtc_node", options) }
 {
+  place_service_ = node_->create_service<arm_message::srv::Place>(
+  "place",
+  std::bind(
+    &MTCTaskNode::handlePlace,
+    this,
+    std::placeholders::_1,
+    std::placeholders::_2));
 }
 
 rclcpp::node_interfaces::NodeBaseInterface::SharedPtr MTCTaskNode::getNodeBaseInterface()
@@ -47,26 +59,19 @@ rclcpp::node_interfaces::NodeBaseInterface::SharedPtr MTCTaskNode::getNodeBaseIn
   return node_->get_node_base_interface();
 }
 
-void MTCTaskNode::setupPlanningScene()
+
+void MTCTaskNode::handlePlace(
+  const std::shared_ptr<arm_message::srv::Place::Request> request,
+  std::shared_ptr<arm_message::srv::Place::Response> response)
 {
-  moveit_msgs::msg::CollisionObject object;
-  object.id = "object";
-  object.header.frame_id = "world";
-  object.primitives.resize(1);
-  object.primitives[0].type = shape_msgs::msg::SolidPrimitive::CYLINDER;
-  object.primitives[0].dimensions = { 0.1, 0.02 };
+  RCLCPP_INFO(node_->get_logger(), "Place request received");
 
-  geometry_msgs::msg::Pose pose;
-  pose.position.x = 0.5;
-  pose.position.y = -0.25;
-  pose.orientation.w = 1.0;
-  object.pose = pose;
+  doTask(request->pose);
 
-  moveit::planning_interface::PlanningSceneInterface psi;
-  psi.applyCollisionObject(object);
+  response->success = (e == 0);
 }
 
-void MTCTaskNode::doTask()
+void MTCTaskNode::doTask(const geometry_msgs::msg::PoseStamped& pose)
 {
 
   auto gripper_group =
@@ -89,7 +94,7 @@ void MTCTaskNode::doTask()
 
   rclcpp::sleep_for(std::chrono::seconds(5));
 
-  task_ = createTask();
+  task_ = createTask(pose);
 
   try
   {
@@ -115,10 +120,12 @@ void MTCTaskNode::doTask()
     return;
   }
 
+  e=0;
+
   return;
 }
 
-mtc::Task MTCTaskNode::createTask()
+mtc::Task MTCTaskNode::createTask(const geometry_msgs::msg::PoseStamped& pose)
 {
   mtc::Task task;
   task.stages()->setName("demo task");
@@ -175,9 +182,10 @@ mtc::Task MTCTaskNode::createTask()
       stage->setObject("object");
 
       geometry_msgs::msg::PoseStamped target_pose_msg;
-      target_pose_msg.header.frame_id = "world";
-        target_pose_msg.pose.position.y = 0.0;
-        target_pose_msg.pose.position.x = 0.5;
+      target_pose_msg=pose;
+      // target_pose_msg.header.frame_id = "world";
+      //   target_pose_msg.pose.position.y = 0.0;
+      //   target_pose_msg.pose.position.x = 0.5;
         target_pose_msg.pose.orientation.y = 0.7071;
         target_pose_msg.pose.orientation.w = 0.7071;
       stage->setPose(target_pose_msg);
@@ -249,9 +257,6 @@ int main(int argc, char** argv)
     executor.spin();
     executor.remove_node(mtc_task_node->getNodeBaseInterface());
   });
-
-  //mtc_task_node->setupPlanningScene();
-  mtc_task_node->doTask();
 
   spin_thread->join();
   rclcpp::shutdown();

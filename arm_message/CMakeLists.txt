@@ -17,6 +17,7 @@ find_package(geometry_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/Pick.srv"
+  "srv/Place.srv"
   DEPENDENCIES geometry_msgs
 )
 if(BUILD_TESTING)
