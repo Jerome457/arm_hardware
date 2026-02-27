@@ -109,6 +109,15 @@ def generate_launch_description():
             moveit_config_2,
         ],
     )
+
+    place_service = Node(
+        package="pick_and_place",
+        executable="place",
+        output="screen",
+        parameters=[
+            moveit_config_2,
+        ],
+    )
     # Load controllers
     load_controllers = []
     for controller in [
@@ -135,6 +144,7 @@ def generate_launch_description():
             # spawn_the_robot,
             ros2_control_node,
             pick_place_demo,
+            place_service,
         ]
         + load_controllers
     )

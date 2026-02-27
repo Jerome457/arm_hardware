@@ -12,14 +12,14 @@
             <!-- <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
             </hardware> -->
-            <joint name="6Thdof-v2_Revolute-12">
+            <joint name="6Thdof-v2_Revolute-43">
                 <param name="id">5</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <!-- <param name="initial_value">${initial_positions['6Thdof-v2_Revolute-12']}</param> -->
                 </state_interface>
             </joint>
-            <joint name="gripperHousing-v2_Slider-13">
+            <joint name="ripperHousingFinal-v1_Slider-44">
                 <param name="id">9</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
@@ -36,7 +36,7 @@
             <!-- <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
             </hardware> -->
-            <joint name="lnk1assm-v2_Revolute-9">
+            <joint name="link1_mod-v3_Revolute-39">
                 <param name="node_id">2</param>
                 <command_interface name="position"/>
                 <command_interface name="velocity"/>
@@ -45,7 +45,7 @@
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="lnk2_assm-v2_Revolute-10">
+            <joint name="Part5linkkkk222-v2_Revolute-40">
                 <param name="node_id">1</param>
                 <command_interface name="position"/>
                 <command_interface name="velocity"/>
@@ -74,10 +74,10 @@
             <!-- <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
             </hardware> -->
-            <joint name="2ndDOFDDD-v1_Revolute-8">
+            <joint name="redassm-v1_Revolute-35">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['2ndDOFDDD-v1_Revolute-8']}</param>
+                  <!-- <param name="initial_value">${initial_positions['redassm-v1_Revolute-35']}</param> -->
                 </state_interface>
             </joint>
         </ros2_control>
@@ -89,10 +89,10 @@
             <!-- <hardware>
                 <plugin>mock_components/GenericSystem</plugin>
             </hardware> -->
-            <joint name="Base_link1-v1_Revolute-1">
+            <joint name="newUpp-v1_Revolute-17">
                 <command_interface name="position"/>
                 <state_interface name="position">
-                  <param name="initial_value">${initial_positions['Base_link1-v1_Revolute-1']}</param>
+                  <!-- <param name="initial_value">${initial_positions['newUpp-v1_Revolute-17']}</param> -->
                 </state_interface>
             </joint>
         </ros2_control>

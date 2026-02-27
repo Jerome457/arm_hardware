@@ -26,7 +26,6 @@
         <group name="stepper"/>
         <group name="nmotion"/>
         <group name="servo"/>
-        <group name="hand"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="open" group="hand">
@@ -38,20 +37,18 @@
     <group_state name="cam" group="arm_hand">
         <joint name="5thDof_mnt-v2_Revolute-11" value="1.1629"/>
         <joint name="6Thdof-v2_Revolute-43" value="2.7192"/>
-        <joint name="GripperHousingFinal-v1_Slider-44" value="0"/>
-        <joint name="Part5linkkkk222-v2_Revolute-40" value="3.1415"/>
+        <joint name="Part5linkkkk222-v2_Revolute-40" value="3.14"/>
         <joint name="link1_mod-v3_Revolute-39" value="-2.5861"/>
         <joint name="newUpp-v1_Revolute-17" value="1.5843"/>
         <joint name="redassm-v1_Revolute-35" value="-1.5708"/>
     </group_state>
     <group_state name="place" group="arm_hand">
-        <joint name="5thDof_mnt-v2_Revolute-11" value="0.9546"/>
-        <joint name="6Thdof-v2_Revolute-43" value="2.6035"/>
-        <joint name="GripperHousingFinal-v1_Slider-44" value="-0.04"/>
-        <joint name="Part5linkkkk222-v2_Revolute-40" value="0"/>
-        <joint name="link1_mod-v3_Revolute-39" value="-2.1001"/>
-        <joint name="newUpp-v1_Revolute-17" value="4.7644"/>
-        <joint name="redassm-v1_Revolute-35" value="-1.4806"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="-1.036"/>
+        <joint name="6Thdof-v2_Revolute-43" value="2.745"/>
+        <joint name="Part5linkkkk222-v2_Revolute-40" value="3.14"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-1.953"/>
+        <joint name="newUpp-v1_Revolute-17" value="1.425"/>
+        <joint name="redassm-v1_Revolute-35" value="-1.7239"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="grasp_frame" group="hand"/>

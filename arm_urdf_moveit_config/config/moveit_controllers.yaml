@@ -33,3 +33,5 @@ moveit_simple_controller_manager:
       - GripperHousingFinal-v1_Slider-44
     action_ns: gripper_cmd
     default: true
+    allow_stalling: true
+    stall_timeout: 10.0

@@ -265,27 +265,27 @@ auto gripper_group =
     return;
   }
 
-  gripper_group->setNamedTarget("open");
+  // gripper_group->setNamedTarget("open");
 
-  bool grip_plan_success2 =
-      (gripper_group->plan(grip_plan) ==
-      moveit::core::MoveItErrorCode::SUCCESS);
+  // bool grip_plan_success2 =
+  //     (gripper_group->plan(grip_plan) ==
+  //     moveit::core::MoveItErrorCode::SUCCESS);
 
-  if (!grip_plan_success2)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Gripper open planning failed");
-    return;
-  }
+  // if (!grip_plan_success2)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Gripper open planning failed");
+  //   return;
+  // }
 
-  rclcpp::sleep_for(std::chrono::seconds(5));
+  // rclcpp::sleep_for(std::chrono::seconds(5));
 
-  auto grip_exec_result2 = gripper_group->execute(grip_plan);
+  // auto grip_exec_result2 = gripper_group->execute(grip_plan);
 
-  if (grip_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
-  {
-    RCLCPP_ERROR(node_->get_logger(), "Gripper open execution failed");
-    return;
-  }
+  // if (grip_exec_result2 != moveit::core::MoveItErrorCode::SUCCESS)
+  // {
+  //   RCLCPP_ERROR(node_->get_logger(), "Gripper open execution failed");
+  //   return;
+  // }
 
   // move_group->setNamedTarget("cam");
 
@@ -415,8 +415,9 @@ task.add(std::move(stage_move_to_pick));
       {
         auto stage =
             std::make_unique<mtc::stages::ModifyPlanningScene>("allow collision (soft_fingers,object)");
-        stage->allowCollisions("object", "right_H-v1", true);
-        stage->allowCollisions("object", "left_H-v1", true);
+        stage->allowCollisions("object", "rightFinger-v1", true);
+        stage->allowCollisions("object", "gripperFingerFinal-v1", true);
+        stage->allowCollisions("object", "final_elecBx-v1", true);
         grasp->insert(std::move(stage));
       }
 

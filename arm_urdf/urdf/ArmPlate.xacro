@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <robot name="ArmPlate">
+
+    <link name="world"/>
+    <joint name="base_to_world" type="fixed">
+        <parent link="world" />
+        <child link="Component9-v4" />   
+    </joint>
     <link name="5thDof_mnt-v2">
         <inertial>
             <origin xyz="0.012732324690562784 0.031437498134228435 -0.0003069334959384307" rpy="0.0 -0.0 -1.4025374347724758e-59" />

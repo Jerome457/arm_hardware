@@ -4,6 +4,8 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Global Options1
+        - /Status1
         - /PlanningScene1
         - /Motion Planning Tasks1
       Splitter Ratio: 0.5
@@ -32,9 +34,12 @@ Panels:
       solutions_splitter:
         - 459
         - 229
-      solutions_view_columns: ~
+      solutions_view_columns:
+        - 57
+        - 58
+        - 151
       tasks_view_columns:
-        - 286
+        - 272
         - 57
         - 57
         - 57
@@ -75,11 +80,6 @@ Visualization Manager:
       Scene Robot:
         Attached Body Color: 150; 50; 150
         Links:
-          2ndDOFDDD-v1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           5thDof_mnt-v2:
             Alpha: 1
             Show Axes: false
@@ -91,7 +91,27 @@ Visualization Manager:
             Show Trail: false
             Value: true
           All Links Enabled: true
-          Base_link1-v1:
+          Component20:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component21:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component22:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component23:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component9-v4:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -99,37 +119,75 @@ Visualization Manager:
           Expand Joint Details: false
           Expand Link Details: false
           Expand Tree: false
+          GripperHousingFinal-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Lidar_Mountst-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           Link Tree Style: Links in Alphabetic Order
+          Part5linkkkk222-v2:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          depthCam-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          depth_CamMount-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          final_elecBx-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           grasp_frame:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-            Value: true
-          gripperHousing-v2:
+          gripperFingerFinal-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          left_H-v1:
+          link1_mod-v3:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          lnk1assm-v2:
+          long-v2:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          lnk2_assm-v2:
+          newUpp-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          right_H-v1:
+          redassm-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          rightFinger-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          world:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
         Robot Alpha: 1
         Show Robot Collision: false
         Show Robot Visual: true
@@ -141,15 +199,13 @@ Visualization Manager:
       Markers:
         All at once?: false
         Value: true
+        ik frame: true
+        ik target: true
+        target frame: true
       Name: Motion Planning Tasks
       Robot:
         Fixed Robot Color: 150; 50; 150
         Links:
-          2ndDOFDDD-v1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           5thDof_mnt-v2:
             Alpha: 1
             Show Axes: false
@@ -161,7 +217,27 @@ Visualization Manager:
             Show Trail: false
             Value: true
           All Links Enabled: true
-          Base_link1-v1:
+          Component20:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component21:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component22:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component23:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Component9-v4:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -169,37 +245,75 @@ Visualization Manager:
           Expand Joint Details: false
           Expand Link Details: false
           Expand Tree: false
+          GripperHousingFinal-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          Lidar_Mountst-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           Link Tree Style: Links in Alphabetic Order
+          Part5linkkkk222-v2:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          depthCam-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          depth_CamMount-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          final_elecBx-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           grasp_frame:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-            Value: true
-          gripperHousing-v2:
+          gripperFingerFinal-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          left_H-v1:
+          link1_mod-v3:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          lnk1assm-v2:
+          long-v2:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          lnk2_assm-v2:
+          newUpp-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          right_H-v1:
+          redassm-v1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          rightFinger-v1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          world:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
         Robot Alpha: 0.5
         Show Robot Collision: false
         Show Robot Visual: true
@@ -217,13 +331,13 @@ Visualization Manager:
       State Display Time: 0.05 s
       Task Solution Topic: /solution
       Tasks:
-        {}
+        demo task: 0
       Trail Step Size: 1
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: Base_link1-v1
+    Fixed Frame: Component9-v4
     Frame Rate: 30
   Name: root
   Tools:
@@ -238,29 +352,27 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2
+      Distance: 1.70842707157135
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.10000000149011612
-        Y: 0.25
-        Z: 0.30000001192092896
+        X: -0.1859680712223053
+        Y: 0.11120697855949402
+        Z: 0.015148276463150978
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5900000333786011
+      Pitch: 0.3000001609325409
       Target Frame: Base_link1-v1
       Value: Orbit (rviz_default_plugins)
-      Yaw: 6.005185127258301
+      Yaw: 3.152005910873413
     Saved: ~
 Window Geometry:
-  " - Slider":
-    collapsed: false
   Displays:
     collapsed: false
   Height: 975
@@ -270,7 +382,9 @@ Window Geometry:
   Hide Right Dock: false
   Motion Planning Tasks:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000002b400000375fc0200000007fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb000000100044006900730070006c006100790073010000003d0000015e000000c900fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670000000166000001910000000000000000fb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a0056006900650077007301000001a1000000da000000a400fffffffb000000120020002d00200053006c00690064006500720000000000ffffffff0000004100fffffffb0000002a004d006f00740069006f006e00200050006c0061006e006e0069006e00670020005400610073006b0073010000028100000131000000e700ffffff000001f60000037500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Motion Planning Tasks - Slider:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000002b400000375fc0200000008fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb000000100044006900730070006c006100790073010000003d0000015e000000c900fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670000000166000001910000000000000000fb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a0056006900650077007301000001a1000000da000000a400fffffffb000000120020002d00200053006c00690064006500720000000000ffffffff0000000000000000fb0000002a004d006f00740069006f006e00200050006c0061006e006e0069006e00670020005400610073006b0073010000028100000131000000e700fffffffb0000003c004d006f00740069006f006e00200050006c0061006e006e0069006e00670020005400610073006b00730020002d00200053006c00690064006500720000000000ffffffff0000004100ffffff000001f60000037500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
   Width: 1200
