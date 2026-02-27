@@ -217,7 +217,7 @@ auto gripper_group =
   std::make_shared<moveit::planning_interface::MoveGroupInterface>(
       node_, "hand");
 
-  move_group->setPlannerId("TRRTkConfigDefault");
+  move_group->setPlannerId("BiTRRTkConfigDefault");
 
   moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
   moveit::planning_interface::MoveGroupInterface::Plan grip_plan;
@@ -343,7 +343,7 @@ mtc::Task MTCTaskNode::createTask()
   task.add(std::move(stage_state_current));
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_, "ompl");
-  sampling_planner->setPlannerId("TRRTkConfigDefault");
+  sampling_planner->setPlannerId("BiTRRTkConfigDefault");
 
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();
 
@@ -392,7 +392,7 @@ task.add(std::move(stage_move_to_pick));
         stage->properties().set("marker_ns", "grasp_pose");
         stage->setPreGraspPose("open");
         stage->setObject("object");
-        stage->setAngleDelta(M_PI / 18);
+        stage->setAngleDelta(M_PI / 2);
         stage->setMonitoredStage(current_state_ptr);  // Hook into current state
 
         Eigen::Isometry3d grasp_frame_transform;
@@ -404,8 +404,8 @@ task.add(std::move(stage_move_to_pick));
         // Compute IK
         auto wrapper =
             std::make_unique<mtc::stages::ComputeIK>("grasp pose IK", std::move(stage));
-        wrapper->setMaxIKSolutions(10);
-        wrapper->setMinSolutionDistance(0.1);
+        wrapper->setMaxIKSolutions(2);
+        wrapper->setMinSolutionDistance(1.0);
         wrapper->setIKFrame(grasp_frame_transform, hand_frame);
         wrapper->properties().configureInitFrom(mtc::Stage::PARENT, { "eef", "group" });
         wrapper->properties().configureInitFrom(mtc::Stage::INTERFACE, { "target_pose" });

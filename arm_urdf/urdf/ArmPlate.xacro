@@ -371,7 +371,7 @@
     <link name="grasp_frame">
     </link>
     <joint name="grasp_joint" type="fixed">
-        <origin xyz="0.0 0.15 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.15 0.0" rpy="3.14 0.0 0.0" />
         <parent link="GripperHousingFinal-v1" />
         <child link="grasp_frame" />
     </joint>
