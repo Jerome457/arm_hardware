@@ -9,63 +9,145 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-    <group name="arm">
-        <chain base_link="Base_link1-v1" tip_link="lnk1assm-v2"/>
-    </group>    
+    <group name="stepper">
+        <chain base_link="newUpp-v1" tip_link="link1_mod-v3"/>
+    </group>
     <group name="nmotion">
-        <chain base_link="lnk1assm-v2" tip_link="6Thdof-v2"/>
+        <chain base_link="link1_mod-v3" tip_link="6Thdof-v2"/>
     </group>
     <group name="servo">
         <chain base_link="6Thdof-v2" tip_link="grasp_frame"/>
     </group>
     <group name="hand">
-        <joint name="gripperHousing-v2_Slider-13"/>
-        <joint name="gripperHousing-v2_Slider-14"/>
+        <joint name="GripperHousingFinal-v1_Slider-46"/>
+        <joint name="GripperHousingFinal-v1_Slider-44"/>
     </group>
-
     <group name="arm_hand">
-        <group name="arm"/>
+        <group name="stepper"/>
         <group name="nmotion"/>
         <group name="servo"/>
+        <group name="hand"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
-    <group_state name="close" group="hand">
-        <joint name="gripperHousing-v2_Slider-13" value="-0.04"/>
-    </group_state>
     <group_state name="open" group="hand">
-        <joint name="gripperHousing-v2_Slider-13" value="0.0"/>
+        <joint name="GripperHousingFinal-v1_Slider-44" value="0"/>
+    </group_state>
+    <group_state name="close" group="hand">
+        <joint name="GripperHousingFinal-v1_Slider-44" value="-0.04"/>
     </group_state>
     <group_state name="cam" group="arm_hand">
-        <joint name="2ndDOFDDD-v1_Revolute-8" value="1.572"/>
-        <joint name="5thDof_mnt-v2_Revolute-11" value="0"/>
-        <joint name="6Thdof-v2_Revolute-12" value="0.1"/>
-        <joint name="Base_link1-v1_Revolute-1" value="4.71239"/>
-        <joint name="lnk1assm-v2_Revolute-9" value="-2.395"/>
-        <joint name="lnk2_assm-v2_Revolute-10" value="0.0"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="1.1629"/>
+        <joint name="6Thdof-v2_Revolute-43" value="2.7192"/>
+        <joint name="GripperHousingFinal-v1_Slider-44" value="0"/>
+        <joint name="Part5linkkkk222-v2_Revolute-40" value="3.1415"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-2.5861"/>
+        <joint name="newUpp-v1_Revolute-17" value="1.5843"/>
+        <joint name="redassm-v1_Revolute-35" value="-1.5708"/>
     </group_state>
     <group_state name="place" group="arm_hand">
-        <joint name="2ndDOFDDD-v1_Revolute-8" value="2.334"/>
-        <joint name="5thDof_mnt-v2_Revolute-11" value="1.138"/>
-        <joint name="6Thdof-v2_Revolute-12" value="2.615"/>
-        <joint name="Base_link1-v1_Revolute-1" value="3.126"/>
-        <joint name="lnk1assm-v2_Revolute-9" value="1.206"/>
-        <joint name="lnk2_assm-v2_Revolute-10" value="0.0"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="0.9546"/>
+        <joint name="6Thdof-v2_Revolute-43" value="2.6035"/>
+        <joint name="GripperHousingFinal-v1_Slider-44" value="-0.04"/>
+        <joint name="Part5linkkkk222-v2_Revolute-40" value="0"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-2.1001"/>
+        <joint name="newUpp-v1_Revolute-17" value="4.7644"/>
+        <joint name="redassm-v1_Revolute-35" value="-1.4806"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="grasp_frame" group="hand"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="2ndDOFDDD-v1" link2="Base_link1-v1" reason="Adjacent"/>
-    <disable_collisions link1="2ndDOFDDD-v1" link2="lnk1assm-v2" reason="Adjacent"/>
     <disable_collisions link1="5thDof_mnt-v2" link2="6Thdof-v2" reason="Adjacent"/>
-    <disable_collisions link1="5thDof_mnt-v2" link2="gripperHousing-v2" reason="Never"/>
-    <disable_collisions link1="5thDof_mnt-v2" link2="left_H-v1" reason="Never"/>
-    <disable_collisions link1="5thDof_mnt-v2" link2="lnk2_assm-v2" reason="Adjacent"/>
-    <disable_collisions link1="5thDof_mnt-v2" link2="right_H-v1" reason="Never"/>
-    <disable_collisions link1="6Thdof-v2" link2="gripperHousing-v2" reason="Adjacent"/>
-    <disable_collisions link1="6Thdof-v2" link2="left_H-v1" reason="Never"/>
-    <disable_collisions link1="6Thdof-v2" link2="lnk2_assm-v2" reason="Never"/>
-    <disable_collisions link1="6Thdof-v2" link2="right_H-v1" reason="Never"/>
-    <disable_collisions link1="gripperHousing-v2" link2="left_H-v1" reason="Adjacent"/>
-    <disable_collisions link1="gripperHousing-v2" link2="right_H-v1" reason="Adjacent"/>
-    <disable_collisions link1="lnk1assm-v2" link2="lnk2_assm-v2" reason="Adjacent"/>
+    <disable_collisions link1="5thDof_mnt-v2" link2="GripperHousingFinal-v1" reason="Never"/>
+    <disable_collisions link1="5thDof_mnt-v2" link2="Part5linkkkk222-v2" reason="Adjacent"/>
+    <disable_collisions link1="5thDof_mnt-v2" link2="gripperFingerFinal-v1" reason="Never"/>
+    <disable_collisions link1="5thDof_mnt-v2" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="5thDof_mnt-v2" link2="rightFinger-v1" reason="Never"/>
+    <disable_collisions link1="6Thdof-v2" link2="GripperHousingFinal-v1" reason="Adjacent"/>
+    <disable_collisions link1="6Thdof-v2" link2="Part5linkkkk222-v2" reason="Never"/>
+    <disable_collisions link1="6Thdof-v2" link2="gripperFingerFinal-v1" reason="Never"/>
+    <disable_collisions link1="6Thdof-v2" link2="rightFinger-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="Component21" reason="Never"/>
+    <disable_collisions link1="Component20" link2="Component22" reason="Never"/>
+    <disable_collisions link1="Component20" link2="Component23" reason="Never"/>
+    <disable_collisions link1="Component20" link2="Component9-v4" reason="Adjacent"/>
+    <disable_collisions link1="Component20" link2="Lidar_Mountst-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Component20" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="Component20" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Component20" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="Component22" reason="Never"/>
+    <disable_collisions link1="Component21" link2="Component23" reason="Never"/>
+    <disable_collisions link1="Component21" link2="Component9-v4" reason="Adjacent"/>
+    <disable_collisions link1="Component21" link2="Lidar_Mountst-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="Part5linkkkk222-v2" reason="Never"/>
+    <disable_collisions link1="Component21" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Component21" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="Component21" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Component21" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="Component23" reason="Never"/>
+    <disable_collisions link1="Component22" link2="Component9-v4" reason="Adjacent"/>
+    <disable_collisions link1="Component22" link2="Lidar_Mountst-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="Part5linkkkk222-v2" reason="Never"/>
+    <disable_collisions link1="Component22" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Component22" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="Component22" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Component22" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="Component9-v4" reason="Adjacent"/>
+    <disable_collisions link1="Component23" link2="Lidar_Mountst-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Component23" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="Component23" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Component23" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="Component9-v4" link2="Lidar_Mountst-v1" reason="Adjacent"/>
+    <disable_collisions link1="Component9-v4" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Component9-v4" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Component9-v4" link2="final_elecBx-v1" reason="Adjacent"/>
+    <disable_collisions link1="Component9-v4" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Component9-v4" link2="long-v2" reason="Adjacent"/>
+    <disable_collisions link1="Component9-v4" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Component9-v4" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="GripperHousingFinal-v1" link2="gripperFingerFinal-v1" reason="Adjacent"/>
+    <disable_collisions link1="GripperHousingFinal-v1" link2="rightFinger-v1" reason="Adjacent"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="Part5linkkkk222-v2" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="depthCam-v1" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="depth_CamMount-v1" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="Lidar_Mountst-v1" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="Part5linkkkk222-v2" link2="link1_mod-v3" reason="Adjacent"/>
+    <disable_collisions link1="depthCam-v1" link2="depth_CamMount-v1" reason="Adjacent"/>
+    <disable_collisions link1="depthCam-v1" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="depthCam-v1" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="depthCam-v1" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="depthCam-v1" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="depthCam-v1" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="depth_CamMount-v1" link2="final_elecBx-v1" reason="Never"/>
+    <disable_collisions link1="depth_CamMount-v1" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="depth_CamMount-v1" link2="long-v2" reason="Adjacent"/>
+    <disable_collisions link1="depth_CamMount-v1" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="depth_CamMount-v1" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="final_elecBx-v1" link2="link1_mod-v3" reason="Never"/>
+    <disable_collisions link1="final_elecBx-v1" link2="long-v2" reason="Never"/>
+    <disable_collisions link1="final_elecBx-v1" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="final_elecBx-v1" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="gripperFingerFinal-v1" link2="rightFinger-v1" reason="Never"/>
+    <disable_collisions link1="link1_mod-v3" link2="newUpp-v1" reason="Never"/>
+    <disable_collisions link1="link1_mod-v3" link2="redassm-v1" reason="Adjacent"/>
+    <disable_collisions link1="long-v2" link2="newUpp-v1" reason="Adjacent"/>
+    <disable_collisions link1="long-v2" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="newUpp-v1" link2="redassm-v1" reason="Adjacent"/>
 </robot>

@@ -119,6 +119,8 @@ void MTCTaskNode::doTask(const geometry_msgs::msg::PoseStamped& pose)
     RCLCPP_ERROR_STREAM(LOGGER, "Task execution failed");
     return;
   }
+  task_.reset();
+  task_.clear();
 
   e=0;
 

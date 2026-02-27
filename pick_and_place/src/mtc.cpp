@@ -417,10 +417,6 @@ task.add(std::move(stage_move_to_pick));
             std::make_unique<mtc::stages::ModifyPlanningScene>("allow collision (soft_fingers,object)");
         stage->allowCollisions("object", "right_H-v1", true);
         stage->allowCollisions("object", "left_H-v1", true);
-        // stage->allowCollisions("object", "firstDOF_final", true);
-        // stage->allowCollisions("firstDOF_final", "Soft_finger_1", true);
-        // stage->allowCollisions("firstDOF_final", "soft_finger_2", true);
-        stage->allowCollisions("object", "<octomap>", true);
         grasp->insert(std::move(stage));
       }
 

@@ -8,6 +8,8 @@ Panels:
         - /Status1
         - /Grid1
         - /RobotModel1
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -62,48 +64,110 @@ Visualization Manager:
         Value: /robot_description
       Enabled: true
       Links:
-        2ndDOFDDD-v1:
+        5thDof_mnt-v2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        5thDof_mnt-v1:
+          Value: true
+        6Thdof-v2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        All Links Enabled:
-          {}
-        Base_link1-v1:
+          Value: true
+        All Links Enabled: true
+        Component20:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
+        Component21:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Component22:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Component23:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Component9-v4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
+        GripperHousingFinal-v1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Lidar_Mountst-v1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Link Tree Style: Links in Alphabetic Order
-        Link3_Assm-v1:
+        Part5linkkkk222-v2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        gripperHousing-v1:
+          Value: true
+        depthCam-v1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        left_H-v1:
+          Value: true
+        depth_CamMount-v1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        link1_ASSM-v1:
+          Value: true
+        final_elecBx-v1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        link2_assm-v1:
+          Value: true
+        grasp_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        right_H-v1:
+        gripperFingerFinal-v1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
+        link1_mod-v3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        long-v2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        newUpp-v1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        redassm-v1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rightFinger-v1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -112,10 +176,93 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        5thDof_mnt-v2:
+          Value: false
+        6Thdof-v2:
+          Value: false
+        All Enabled: false
+        Component20:
+          Value: false
+        Component21:
+          Value: false
+        Component22:
+          Value: false
+        Component23:
+          Value: false
+        Component9-v4:
+          Value: false
+        GripperHousingFinal-v1:
+          Value: false
+        Lidar_Mountst-v1:
+          Value: false
+        Part5linkkkk222-v2:
+          Value: false
+        depthCam-v1:
+          Value: false
+        depth_CamMount-v1:
+          Value: false
+        final_elecBx-v1:
+          Value: false
+        grasp_frame:
+          Value: true
+        gripperFingerFinal-v1:
+          Value: false
+        link1_mod-v3:
+          Value: false
+        long-v2:
+          Value: false
+        newUpp-v1:
+          Value: false
+        redassm-v1:
+          Value: false
+        rightFinger-v1:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        Component9-v4:
+          Component20:
+            {}
+          Component21:
+            {}
+          Component22:
+            {}
+          Component23:
+            {}
+          Lidar_Mountst-v1:
+            {}
+          final_elecBx-v1:
+            {}
+          long-v2:
+            depth_CamMount-v1:
+              depthCam-v1:
+                {}
+            newUpp-v1:
+              redassm-v1:
+                link1_mod-v3:
+                  Part5linkkkk222-v2:
+                    5thDof_mnt-v2:
+                      6Thdof-v2:
+                        GripperHousingFinal-v1:
+                          grasp_frame:
+                            {}
+                          gripperFingerFinal-v1:
+                            {}
+                          rightFinger-v1:
+                            {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: Base_link1-v1
+    Fixed Frame: Component9-v4
     Frame Rate: 30
   Name: root
   Tools:
@@ -158,25 +305,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 10
+      Distance: 1.3872524499893188
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.050373274832963943
+        Y: -0.005629000253975391
+        Z: -0.027486635372042656
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.785398006439209
+      Pitch: 0.4203980565071106
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.785398006439209
+      Yaw: 4.600405216217041
     Saved: ~
 Window Geometry:
   Displays:

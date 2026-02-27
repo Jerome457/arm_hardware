@@ -14,6 +14,3 @@ pose:
       z: 0.0
       w: 1.0
 "
-
-ros2 service call /place arm_message/srv/Place \
-"{pose: {header: {frame_id: 'world'}, pose: {position: {x: 0.5, y: 0.0, z: 0.04}, orientation: {x: 0.0, y: 0.7071, z: 0.0, w: 0.7071}}}}"

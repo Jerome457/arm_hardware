@@ -1,13 +1,15 @@
 # This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 200  # Hz
+    update_rate: 100  # Hz
 
-    arm_controller:
+    stepper_controller:
       type: joint_trajectory_controller/JointTrajectoryController
+
 
     nmotion_controller:
       type: joint_trajectory_controller/JointTrajectoryController
+
 
     servo_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -20,44 +22,40 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-arm_controller:
+stepper_controller:
   ros__parameters:
-    acrion_ns: follow_joint_trajectory
+    action_ns: follow_joint_trajectory
     joints:
-      - Base_link1-v1_Revolute-1
-      - 2ndDOFDDD-v1_Revolute-8
+      - newUpp-v1_Revolute-17
+      - redassm-v1_Revolute-35
     command_interfaces:
       - position
     state_interfaces:
       - position
-
+      - velocity
 nmotion_controller:
   ros__parameters:
-    acrion_ns: follow_joint_trajectory
+    action_ns: follow_joint_trajectory
     joints:
-      - lnk1assm-v2_Revolute-9
-      - lnk2_assm-v2_Revolute-10
+      - link1_mod-v3_Revolute-39
+      - Part5linkkkk222-v2_Revolute-40
       - 5thDof_mnt-v2_Revolute-11
     command_interfaces:
       - position
-      - velocity
     state_interfaces:
       - position
       - velocity
-
 servo_controller:
   ros__parameters:
-    acrion_ns: follow_joint_trajectory
+    action_ns: follow_joint_trajectory
     joints:
-    - 6Thdof-v2_Revolute-12
+      - 6Thdof-v2_Revolute-43
     command_interfaces:
       - position
     state_interfaces:
       - position
-      
+      - velocity
 hand_controller:
   ros__parameters:
-    acrion_ns: gripper_cmd
-    joint: gripperHousing-v2_Slider-13
-    allow_stalling: true
-    stall_timeout: 10.0
+    action_ns: gripper_cmd
+    joint: GripperHousingFinal-v1_Slider-44

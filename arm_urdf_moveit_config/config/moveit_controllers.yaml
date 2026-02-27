@@ -1,41 +1,35 @@
 # MoveIt uses this configuration for controller management
-trajectory_execution:
-  allowed_execution_duration_scaling: 1.05
-  allowed_goal_duration_margin: 0.05
-  allowed_start_tolerance: 0.1
 
 moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
 
 moveit_simple_controller_manager:
   controller_names:
-    - arm_controller
+    - stepper_controller
     - nmotion_controller
     - servo_controller
     - hand_controller
 
-  arm_controller:
-    type: FollowJointTrajectory
+  stepper_controller:
     action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
     joints:
-      - Base_link1-v1_Revolute-1
-      - 2ndDOFDDD-v1_Revolute-8
-
+      - newUpp-v1_Revolute-17
+      - redassm-v1_Revolute-35
   nmotion_controller:
-    type: FollowJointTrajectory
     action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
     joints:
-      - lnk1assm-v2_Revolute-9
-      - lnk2_assm-v2_Revolute-10
+      - link1_mod-v3_Revolute-39
+      - Part5linkkkk222-v2_Revolute-40
       - 5thDof_mnt-v2_Revolute-11
-
   servo_controller:
-    type: FollowJointTrajectory
     action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
     joints:
-      - 6Thdof-v2_Revolute-12
+      - 6Thdof-v2_Revolute-43
   hand_controller:
     type: GripperCommand
     joints:
-      - gripperHousing-v2_Slider-13
+      - GripperHousingFinal-v1_Slider-44
     action_ns: gripper_cmd
     default: true
