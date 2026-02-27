@@ -143,6 +143,25 @@ void MTCTaskNode::setupPlanningScene(
   ground_color.color.b = 1.0;
   ground_color.color.a = 0.0;
 
+  // ----- Add Camera Block (0.1 x 0.1 x 0.1) -----
+  moveit_msgs::msg::CollisionObject camera_block;
+  camera_block.id = "camera_block";
+  camera_block.header.frame_id = "depth_CamMount-v1";  // parent frame
+
+  shape_msgs::msg::SolidPrimitive box_shape;
+  box_shape.type = shape_msgs::msg::SolidPrimitive::BOX;
+  box_shape.dimensions = {0.05, 0.05, 0.05};  // x, y, z
+
+  geometry_msgs::msg::Pose box_pose;
+  box_pose.position.x = -0.15;
+  box_pose.position.y = 0.0;
+  box_pose.position.z = 0.0; 
+  box_pose.orientation.w = 1.0;
+
+  camera_block.primitives.push_back(box_shape);
+  camera_block.primitive_poses.push_back(box_pose);
+  camera_block.operation = camera_block.ADD;
+
   // ----- Publish Planning Scene -----
   moveit_msgs::msg::PlanningScene scene_msg;
   scene_msg.is_diff = true;
@@ -150,6 +169,7 @@ void MTCTaskNode::setupPlanningScene(
   scene_msg.world.collision_objects.push_back(ground);
   scene_msg.object_colors.push_back(mesh_color);
   scene_msg.object_colors.push_back(ground_color);
+  scene_msg.world.collision_objects.push_back(camera_block);
 
   // Publisher must stay alive briefly to ensure the message is sent
   auto planning_scene_pub =
@@ -218,6 +238,7 @@ auto gripper_group =
       node_, "hand");
 
   move_group->setPlannerId("BiTRRTkConfigDefault");
+  move_group->setPlanningTime(20.0);
 
   moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
   moveit::planning_interface::MoveGroupInterface::Plan grip_plan;
@@ -225,9 +246,7 @@ auto gripper_group =
   gripper_group->setNamedTarget("close");
   rclcpp::sleep_for(std::chrono::seconds(2));
 
-  bool grip_plan_success =
-      (gripper_group->plan(grip_plan) ==
-      moveit::core::MoveItErrorCode::SUCCESS);
+  bool grip_plan_success = (gripper_group->plan(grip_plan) == moveit::core::MoveItErrorCode::SUCCESS);
 
   if (!grip_plan_success)
   {
@@ -235,7 +254,7 @@ auto gripper_group =
     return;
   }
 
-  rclcpp::sleep_for(std::chrono::seconds(5));
+  rclcpp::sleep_for(std::chrono::seconds(2));
 
   auto grip_exec_result = gripper_group->execute(grip_plan);
 
@@ -344,6 +363,7 @@ mtc::Task MTCTaskNode::createTask()
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_, "ompl");
   sampling_planner->setPlannerId("BiTRRTkConfigDefault");
+  sampling_planner->setTimeout(15.0);
 
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();
 
@@ -361,9 +381,9 @@ mtc::Task MTCTaskNode::createTask()
   auto stage_move_to_pick = std::make_unique<mtc::stages::Connect>(
     "move to pick",
     mtc::stages::Connect::GroupPlannerVector{ { arm_group_name, sampling_planner } });
-stage_move_to_pick->setTimeout(100.0);
-stage_move_to_pick->properties().configureInitFrom(mtc::Stage::PARENT);
-task.add(std::move(stage_move_to_pick));
+  stage_move_to_pick->setTimeout(100.0);
+  stage_move_to_pick->properties().configureInitFrom(mtc::Stage::PARENT);
+  task.add(std::move(stage_move_to_pick));
     {
       auto grasp = std::make_unique<mtc::SerialContainer>("pick object");
       task.properties().exposeTo(grasp->properties(), { "eef", "group", "ik_frame" });
@@ -418,6 +438,8 @@ task.add(std::move(stage_move_to_pick));
         stage->allowCollisions("object", "rightFinger-v1", true);
         stage->allowCollisions("object", "gripperFingerFinal-v1", true);
         stage->allowCollisions("object", "final_elecBx-v1", true);
+        stage->allowCollisions("rightFinger-v1", "final_elecBx-v1", true);
+        stage->allowCollisions("gripperFingerFinal-v1", "final_elecBx-v1", true);
         grasp->insert(std::move(stage));
       }
 

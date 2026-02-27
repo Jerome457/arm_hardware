@@ -24,6 +24,7 @@
             </joint>
             <joint name="link1_mod-v3_Revolute-39">
                 <command_interface name="position"/>
+                <command_interface name="velocity"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['link1_mod-v3_Revolute-39']}</param>
                 </state_interface>
@@ -31,6 +32,7 @@
             </joint>
             <joint name="Part5linkkkk222-v2_Revolute-40">
                 <command_interface name="position"/>
+                <command_interface name="velocity"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['Part5linkkkk222-v2_Revolute-40']}</param>
                 </state_interface>
@@ -38,6 +40,7 @@
             </joint>
             <joint name="5thDof_mnt-v2_Revolute-11">
                 <command_interface name="position"/>
+                <command_interface name="velocity"/>    
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['5thDof_mnt-v2_Revolute-11']}</param>
                 </state_interface>

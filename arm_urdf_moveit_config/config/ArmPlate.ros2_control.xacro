@@ -13,13 +13,13 @@
                 <plugin>mock_components/GenericSystem</plugin>
             </hardware> -->
             <joint name="6Thdof-v2_Revolute-43">
-                <param name="id">5</param>
+                <param name="id">4</param>
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <!-- <param name="initial_value">${initial_positions['6Thdof-v2_Revolute-12']}</param> -->
                 </state_interface>
             </joint>
-            <joint name="ripperHousingFinal-v1_Slider-44">
+            <joint name="GripperHousingFinal-v1_Slider-44">
                 <param name="id">9</param>
                 <command_interface name="position"/>
                 <state_interface name="position">

@@ -103,7 +103,7 @@ StepperHardware::read(const rclcpp::Time &, const rclcpp::Duration &)
   if (stepper_ && stepper_->getPosition(angle_deg))
   {
     // Continuous DEG -> RAD
-    if(limit_) angle_deg/=2;
+    if(limit_) angle_deg/=-2;
     position_state_ = angle_deg * M_PI / 180.0;
   }
 
@@ -119,7 +119,7 @@ StepperHardware::write(const rclcpp::Time &, const rclcpp::Duration &)
   {
     double cmd_rad = position_command_;
     double cmd_deg = cmd_rad * 180 / M_PI;
-    if(limit_) cmd_deg*=2;
+    if(limit_) cmd_deg*=-2;
 
     stepper_->setPosition(static_cast<float>(cmd_deg));
   }

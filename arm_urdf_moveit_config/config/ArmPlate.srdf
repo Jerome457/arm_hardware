@@ -35,20 +35,20 @@
         <joint name="GripperHousingFinal-v1_Slider-44" value="-0.04"/>
     </group_state>
     <group_state name="cam" group="arm_hand">
-        <joint name="5thDof_mnt-v2_Revolute-11" value="1.1629"/>
-        <joint name="6Thdof-v2_Revolute-43" value="2.7192"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="-0.832"/>
+        <joint name="6Thdof-v2_Revolute-43" value="1.160"/>
         <joint name="Part5linkkkk222-v2_Revolute-40" value="3.14"/>
-        <joint name="link1_mod-v3_Revolute-39" value="-2.5861"/>
-        <joint name="newUpp-v1_Revolute-17" value="1.5843"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-2.462"/>
+        <joint name="newUpp-v1_Revolute-17" value="1.572"/>
         <joint name="redassm-v1_Revolute-35" value="-1.5708"/>
     </group_state>
     <group_state name="place" group="arm_hand">
-        <joint name="5thDof_mnt-v2_Revolute-11" value="-1.036"/>
-        <joint name="6Thdof-v2_Revolute-43" value="2.745"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="-0.934"/>
+        <joint name="6Thdof-v2_Revolute-43" value="1.160"/>
         <joint name="Part5linkkkk222-v2_Revolute-40" value="3.14"/>
-        <joint name="link1_mod-v3_Revolute-39" value="-1.953"/>
+        <joint name="link1_mod-v3_Revolute-39" value="2.055"/>
         <joint name="newUpp-v1_Revolute-17" value="1.425"/>
-        <joint name="redassm-v1_Revolute-35" value="-1.7239"/>
+        <joint name="redassm-v1_Revolute-35" value="-1.675"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="grasp_frame" group="hand"/>

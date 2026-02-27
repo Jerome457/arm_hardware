@@ -148,7 +148,8 @@ mtc::Task MTCTaskNode::createTask(const geometry_msgs::msg::PoseStamped& pose)
   task.add(std::move(stage_state_current));
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_);
-  sampling_planner->setPlannerId("TRRTkConfigDefault");
+  sampling_planner->setPlannerId("BiTRRTkConfigDefault");
+  sampling_planner->setTimeout(15.0);
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();
 
   auto cartesian_planner = std::make_shared<mtc::solvers::CartesianPath>();

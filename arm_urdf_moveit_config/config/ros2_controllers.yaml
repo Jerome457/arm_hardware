@@ -32,7 +32,6 @@ stepper_controller:
       - position
     state_interfaces:
       - position
-      - velocity
 nmotion_controller:
   ros__parameters:
     action_ns: follow_joint_trajectory
@@ -42,6 +41,7 @@ nmotion_controller:
       - 5thDof_mnt-v2_Revolute-11
     command_interfaces:
       - position
+      - velocity
     state_interfaces:
       - position
       - velocity
@@ -54,7 +54,6 @@ servo_controller:
       - position
     state_interfaces:
       - position
-      - velocity
 hand_controller:
   ros__parameters:
     action_ns: gripper_cmd
