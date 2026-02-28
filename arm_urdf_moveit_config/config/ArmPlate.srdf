@@ -43,12 +43,12 @@
         <joint name="redassm-v1_Revolute-35" value="-1.5708"/>
     </group_state>
     <group_state name="place" group="arm_hand">
-        <joint name="5thDof_mnt-v2_Revolute-11" value="-0.934"/>
-        <joint name="6Thdof-v2_Revolute-43" value="1.160"/>
-        <joint name="Part5linkkkk222-v2_Revolute-40" value="3.14"/>
-        <joint name="link1_mod-v3_Revolute-39" value="2.055"/>
-        <joint name="newUpp-v1_Revolute-17" value="1.425"/>
-        <joint name="redassm-v1_Revolute-35" value="-1.675"/>
+        <joint name="5thDof_mnt-v2_Revolute-11" value="-1.063"/>
+        <joint name="6Thdof-v2_Revolute-43" value="1.047"/>
+        <joint name="Part5linkkkk222-v2_Revolute-40" value="0.0"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-2.055"/>
+        <joint name="newUpp-v1_Revolute-17" value="4.762"/>
+        <joint name="redassm-v1_Revolute-35" value="-1.499"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="grasp_frame" group="hand"/>

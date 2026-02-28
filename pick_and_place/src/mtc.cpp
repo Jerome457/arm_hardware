@@ -82,7 +82,7 @@ void MTCTaskNode::setupPlanningScene(
 
 
   // Load the mesh resource (from your package)
-  std::string mesh_path = "package://arm_urdf/rcup_objects/M30-1.stl";
+  std::string mesh_path = "package://arm_urdf/rcup_objects/V20(1).stl";
 
   // Scale the mesh down (0.001 = 1/1000th original size)
   shapes::Mesh* mesh = shapes::createMeshFromResource(mesh_path, Eigen::Vector3d(0.0001, 0.0001, 0.0001));
@@ -158,9 +158,9 @@ void MTCTaskNode::setupPlanningScene(
   box_pose.position.z = 0.0; 
   box_pose.orientation.w = 1.0;
 
-  camera_block.primitives.push_back(box_shape);
-  camera_block.primitive_poses.push_back(box_pose);
-  camera_block.operation = camera_block.ADD;
+  // camera_block.primitives.push_back(box_shape);
+  // camera_block.primitive_poses.push_back(box_pose);
+  // camera_block.operation = camera_block.ADD;
 
   // ----- Publish Planning Scene -----
   moveit_msgs::msg::PlanningScene scene_msg;
@@ -169,7 +169,7 @@ void MTCTaskNode::setupPlanningScene(
   scene_msg.world.collision_objects.push_back(ground);
   scene_msg.object_colors.push_back(mesh_color);
   scene_msg.object_colors.push_back(ground_color);
-  scene_msg.world.collision_objects.push_back(camera_block);
+  // scene_msg.world.collision_objects.push_back(camera_block);
 
   // Publisher must stay alive briefly to ensure the message is sent
   auto planning_scene_pub =
@@ -237,7 +237,7 @@ auto gripper_group =
   std::make_shared<moveit::planning_interface::MoveGroupInterface>(
       node_, "hand");
 
-  move_group->setPlannerId("BiTRRTkConfigDefault");
+  move_group->setPlannerId("RRTConnectkConfigDefault");
   move_group->setPlanningTime(20.0);
 
   moveit::planning_interface::MoveGroupInterface::Plan arm_plan;
@@ -362,7 +362,7 @@ mtc::Task MTCTaskNode::createTask()
   task.add(std::move(stage_state_current));
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_, "ompl");
-  sampling_planner->setPlannerId("BiTRRTkConfigDefault");
+  sampling_planner->setPlannerId("RRTConnectkConfigDefault");
   sampling_planner->setTimeout(15.0);
 
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();

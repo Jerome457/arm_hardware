@@ -1,3 +1,5 @@
+ros2 launch arm_urdf pnp_rviz.launch.py
+
 ros2 service call /Pick_and_Place arm_message/srv/Pick "
 object_id: 'object'
 pose:
@@ -5,7 +7,7 @@ pose:
     frame_id: 'world'
   pose:
     position:
-      x: 0.50
+      x: -0.70
       y: 0.0
       z: 0.05
     orientation:
@@ -17,4 +19,4 @@ pose:
 
 
 ros2 service call /place arm_message/srv/Place \
-"{pose: {header: {frame_id: 'world'}, pose: {position: {x: 0.5, y: 0.0, z: 0.04}, orientation: {x: 0.0, y: 0.7071, z: 0.0, w: 0.7071}}}}"
+"{pose: {header: {frame_id: 'world'}, pose: {position: {x: -0.7, y: 0.0, z: 0.04}, orientation: {x: 0.0, y: 0.7071, z: 0.0, w: 0.7071}}}}"

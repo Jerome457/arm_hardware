@@ -45,7 +45,7 @@
         </collision>
     </link>
     <link name="redassm-v1">
-        <inertial>
+        <!-- <inertial>
             <origin xyz="0.0045480904541335574 -0.008359528801030676 0.10098035514768636" rpy="0.0 -0.0 0.0" />
             <mass value="6.794045956021914" />
             <inertia ixx="0.04847097589923233" iyy="0.051084808654606795" izz="0.02583120358184199" ixy="-0.0005049440216612079" iyz="0.0009392673544488904" ixz="0.000615655195551375" />
@@ -60,6 +60,21 @@
             <origin xyz="4.456090927362766e-09 1.018317314915862e-09 0.009000003253548154" rpy="8.388603136835838e-15 -7.460303902010976e-15 -0.07399302152178323" />
             <geometry>
                 <mesh filename="package://arm_urdf/meshes/redassm-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision> -->
+
+       <visual>
+            <origin xyz="0 0 0.08" rpy="0 0 0"/>
+            <geometry>
+            <box size="0.1 0.1 0.2"/> <!-- x y z in meters -->
+            </geometry>
+        </visual>
+
+        <!-- Collision geometry -->
+        <collision>
+            <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+            <geometry>
+            <box size="0.1 0.1 0.2"/>
             </geometry>
         </collision>
     </link>
@@ -368,6 +383,30 @@
         </collision>
     </link>
 
+    <link name="camera_block">
+    <visual>
+        <origin xyz="-0.15 0 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.05 0.05 0.05"/>
+        </geometry>
+        <material name="red">
+        <color rgba="1 0 0 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <origin xyz="-0.15 0 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="0.05 0.05 0.05"/>
+        </geometry>
+    </collision>
+    </link>
+
+    <joint name="camera_block_joint" type="fixed">
+    <parent link="depth_CamMount-v1"/>
+    <child link="camera_block"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
     <link name="grasp_frame">
     </link>
     <joint name="grasp_joint" type="fixed">
