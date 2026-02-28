@@ -3,8 +3,9 @@
 
     <link name="world"/>
     <joint name="base_to_world" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 3.14" />
         <parent link="world" />
-        <child link="Component9-v4" />   
+        <child link="Component9-v4" /> 
     </joint>
     <link name="5thDof_mnt-v2">
         <inertial>

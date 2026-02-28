@@ -46,7 +46,7 @@
         <joint name="5thDof_mnt-v2_Revolute-11" value="-1.063"/>
         <joint name="6Thdof-v2_Revolute-43" value="1.047"/>
         <joint name="Part5linkkkk222-v2_Revolute-40" value="0.0"/>
-        <joint name="link1_mod-v3_Revolute-39" value="-2.055"/>
+        <joint name="link1_mod-v3_Revolute-39" value="-1.715"/>
         <joint name="newUpp-v1_Revolute-17" value="4.762"/>
         <joint name="redassm-v1_Revolute-35" value="-1.499"/>
     </group_state>
