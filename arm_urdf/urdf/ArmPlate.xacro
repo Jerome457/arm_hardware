@@ -214,18 +214,18 @@
     </link>
     <link name="depth_CamMount-v1">
         <inertial>
-            <origin xyz="-0.010000400047506589 -0.008874522160693062 0.01856899713210183" rpy="1.0947644252537636e-47 -0.0 2.167227418503721e-47" />
+            <origin xyz="-0.0018745221606845065 0.003999599952482269 -0.028568997132097564" rpy="-2.1895288505075267e-47 -0.0 0.0" />
             <mass value="0.3638731014386725" />
-            <inertia ixx="0.00012703039538089484" iyy="0.0006733838995720831" izz="0.0005842583201846813" ixy="-2.013649249097471e-09" iyz="7.605648956632293e-06" ixz="4.2427877746841524e-10" />
+            <inertia ixx="0.0006733838995719996" iyy="0.00012703039538089484" izz="0.0005842583201846746" ixy="-2.013649054791177e-09" iyz="-4.2427862265159705e-10" ixz="-7.605648956632293e-06" />
         </inertial>
         <visual name="depth_CamMount-v1_visual">
-            <origin xyz="0.11400000040019924 -0.06568965261112218 0.002882962337094881" rpy="3.141592653589786 -0.7853981633974474 1.570796326795628" />
+            <origin xyz="-0.05868965261115761 0.12800000040017318 -0.012882962337131687" rpy="-5.187405321842128e-13 0.7853981633975156 -7.310674357569907e-13" />
             <geometry>
                 <mesh filename="package://arm_urdf/meshes/depth_CamMount-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="depth_CamMount-v1_collision">
-            <origin xyz="0.11400000040019924 -0.06568965261112218 0.002882962337094881" rpy="3.141592653589786 -0.7853981633974474 1.570796326795628" />
+            <origin xyz="-0.05868965261115761 0.12800000040017318 -0.012882962337131687" rpy="-5.187405321842128e-13 0.7853981633975156 -7.310674357569907e-13" />
             <geometry>
                 <mesh filename="package://arm_urdf/meshes/depth_CamMount-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -233,18 +233,18 @@
     </link>
     <link name="depthCam-v1">
         <inertial>
-            <origin xyz="-0.00935716369844542 0.00924907721198755 0.015605867277937656" rpy="-5.605193857299268e-45 -0.0 0.0" />
+            <origin xyz="-0.009357163698450962 0.00924907721200409 0.015605867277929094" rpy="0.0 -0.0 0.0" />
             <mass value="1.3163395126511606" />
-            <inertia ixx="0.0030530914449512503" iyy="0.00025654140400710446" izz="0.0030520472296760026" ixy="9.36949828833633e-09" iyz="-3.302601715021724e-08" ixz="3.105331512459619e-05" />
+            <inertia ixx="0.003053091444951306" iyy="0.0002565414040073265" izz="0.0030520472296758916" ixy="9.36949935692599e-09" iyz="-3.3026016095505366e-08" ixz="3.105331512448517e-05" />
         </inertial>
         <visual name="depthCam-v1_visual">
-            <origin xyz="0.01546614732761924 0.00028149550866654496 -0.005257667813864728" rpy="-0.7853981633974472 7.26120552574376e-13 -1.5707963267948921" />
+            <origin xyz="0.015466147327618529 0.0002814955086845039 -0.005257667813868281" rpy="-0.785398163397379 3.6171066142290407e-13 -1.5707963267945282" />
             <geometry>
                 <mesh filename="package://arm_urdf/meshes/depthCam-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </visual>
         <collision name="depthCam-v1_collision">
-            <origin xyz="0.01546614732761924 0.00028149550866654496 -0.005257667813864728" rpy="-0.7853981633974472 7.26120552574376e-13 -1.5707963267948921" />
+            <origin xyz="0.015466147327618529 0.0002814955086845039 -0.005257667813868281" rpy="-0.785398163397379 3.6171066142290407e-13 -1.5707963267945282" />
             <geometry>
                 <mesh filename="package://arm_urdf/meshes/depthCam-v1.stl" scale="0.001 0.001 0.001" />
             </geometry>
@@ -383,31 +383,31 @@
             </geometry>
         </collision>
     </link>
-
-    <link name="camera_block">
-    <visual>
-        <origin xyz="-0.15 0 0" rpy="0 0 0"/>
-        <geometry>
-        <box size="0.05 0.05 0.05"/>
-        </geometry>
-        <material name="red">
-        <color rgba="1 0 0 1"/>
-        </material>
-    </visual>
-
-    <collision>
-        <origin xyz="-0.15 0 0" rpy="0 0 0"/>
-        <geometry>
-        <box size="0.05 0.05 0.05"/>
-        </geometry>
-    </collision>
+    <link name="short-v1">
+        <inertial>
+            <origin xyz="-0.00975024960152922 -0.006653722750306948 -0.05000000140909855" rpy="0.0 -0.0 1.3494013367335073e-79" />
+            <mass value="0.12613747167058814" />
+            <inertia ixx="0.00011014358316720205" iyy="0.00011041634559760813" izz="1.0330809314368361e-05" ixy="-2.2052893059679857e-07" iyz="-6.418476861114185e-17" ixz="1.3877787807814455e-17" />
+        </inertial>
+        <visual name="short-v1_visual">
+            <origin xyz="-0.009999996746523295 -0.00625000202873176 -1.0000000014090966" rpy="1.5707963267948961 -6.982298569066938e-14 3.1415926535897905" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/short-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="short-v1_collision">
+            <origin xyz="-0.009999996746523295 -0.00625000202873176 -1.0000000014090966" rpy="1.5707963267948961 -6.982298569066938e-14 3.1415926535897905" />
+            <geometry>
+                <mesh filename="package://arm_urdf/meshes/short-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
     </link>
 
-    <joint name="camera_block_joint" type="fixed">
+    <!-- <joint name="camera_block_joint" type="fixed">
     <parent link="depth_CamMount-v1"/>
     <child link="camera_block"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+    </joint> -->
     <link name="grasp_frame">
     </link>
     <joint name="grasp_joint" type="fixed">
@@ -452,13 +452,8 @@
         <child link="Component23" />
         <axis xyz="6.374626356646348e-32 -6.063718096207205e-16 -1.0" />
     </joint>
-    <joint name="long-v2_Rigid-33" type="fixed">
-        <origin xyz="0.02000000000000001 -0.0005000000000000072 0.7525000000000001" rpy="-9.348812228900571e-32 2.2392344388978236e-15 -4.2700885562507227e-19" />
-        <parent link="long-v2" />
-        <child link="depth_CamMount-v1" />
-    </joint>
     <joint name="depth_CamMount-v1_Rigid-34" type="fixed">
-        <origin xyz="-0.0006500000000000128 -0.008217339999999993 0.028052379999999887" rpy="1.5707963267948966 -1.5707963267948966 0" />
+        <origin xyz="-0.0012173399999999646 0.013349999999999982 -0.038052379999999886" rpy="3.141592653589793 1.5707963267948966 0" />
         <parent link="depth_CamMount-v1" />
         <child link="depthCam-v1" />
     </joint>
@@ -522,5 +517,15 @@
         <origin xyz="-0.28999999859091186 0.01500014341606863 0.11099999674644999" rpy="3.141592653589787 3.118844430753409e-16 3.1415926535897922" />
         <parent link="Component9-v4" />
         <child link="Lidar_Mountst-v1" />
+    </joint>
+    <joint name="long-v2_Rigid-48" type="fixed">
+        <origin xyz="0.016250000000000007 -0.008000000000000007 0.7525000000000001" rpy="-1.5707963267948966 -1.5707963267948966 0" />
+        <parent link="long-v2" />
+        <child link="short-v1" />
+    </joint>
+    <joint name="short-v1_Rigid-49" type="fixed">
+        <origin xyz="-0.01 -0.010250000000000004 -0.1" rpy="-9.251398516249754e-32 -1.5707963267948966 0" />
+        <parent link="short-v1" />
+        <child link="depth_CamMount-v1" />
     </joint>
 </robot>

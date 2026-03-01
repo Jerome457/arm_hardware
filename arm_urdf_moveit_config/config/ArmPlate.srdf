@@ -146,5 +146,8 @@
     <disable_collisions link1="link1_mod-v3" link2="redassm-v1" reason="Adjacent"/>
     <disable_collisions link1="long-v2" link2="newUpp-v1" reason="Adjacent"/>
     <disable_collisions link1="long-v2" link2="redassm-v1" reason="Never"/>
+    <disable_collisions link1="long-v2" link2="short-v1" reason="Adjacent"/>
+    <disable_collisions link1="long-v2" link2="depth_CamMount-v1" reason="Adjacent"/>
+    <disable_collisions link1="short-v1" link2="depth_CamMount-v1" reason="Adjacent"/>
     <disable_collisions link1="newUpp-v1" link2="redassm-v1" reason="Adjacent"/>
 </robot>
