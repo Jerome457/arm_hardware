@@ -7,7 +7,7 @@ pose:
     frame_id: 'world'
   pose:
     position:
-      x: -0.70
+      x: 0.70
       y: 0.0
       z: 0.05
     orientation:

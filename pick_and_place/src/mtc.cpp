@@ -254,7 +254,7 @@ auto gripper_group =
     return;
   }
 
-  rclcpp::sleep_for(std::chrono::seconds(2));
+  rclcpp::sleep_for(std::chrono::seconds(5));
 
   auto grip_exec_result = gripper_group->execute(grip_plan);
 
